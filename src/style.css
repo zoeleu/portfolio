@@ -148,6 +148,25 @@ footer {
   color: var(--muted);
 }
 
+/* Home page: projects on the left, the rest on the right, on wide screens */
+
+@media (min-width: 56rem) {
+  .home {
+    max-width: 60rem;
+  }
+
+  .home header {
+    max-width: 36rem;
+  }
+
+  .columns {
+    display: grid;
+    grid-template-columns: 3fr 2fr;
+    gap: 0 4rem;
+    align-items: start;
+  }
+}
+
 /* Post lists: date column + title */
 
 .posts li {
