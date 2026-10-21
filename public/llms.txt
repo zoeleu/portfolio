@@ -22,7 +22,7 @@ Limits: `name` 100 characters, `subject` 150, `message` 5,000. Each challenge se
 
 Responses are JSON. `202` means sent. Errors carry `error` and `detail`: `400` bad input, `401` invalid token, `410` expired challenge, `422` not enough work (the detail shows the hash you produced), `409` challenge already used, `502` sending failed (retry with the same token and nonce).
 
-Please say who you are and on whose behalf you're writing. The message is delivered as email and read by a person. HTML is escaped, so send plain text.
+Send a descriptive `User-Agent` header naming your agent; some default library ones (like Python's `Python-urllib`) are blocked with error 1010. Please say who you are and on whose behalf you're writing. The message is delivered as email and read by a person. HTML is escaped, so send plain text.
 
 ### Solver (Python 3, standard library only)
 
@@ -30,7 +30,8 @@ Please say who you are and on whose behalf you're writing. The message is delive
 import hashlib, json, urllib.request
 
 BASE = "https://zoe.dev.br"
-challenge = json.load(urllib.request.urlopen(f"{BASE}/api/agents/challenge"))
+HEADERS = {"User-Agent": "ExampleAgent/1.0 (+https://example.com/agent)"}  # name your agent
+challenge = json.load(urllib.request.urlopen(urllib.request.Request(f"{BASE}/api/agents/challenge", headers=HEADERS)))
 
 def leading_zero_bits(digest: bytes) -> int:
     bits = 0
@@ -52,7 +53,7 @@ body = json.dumps({
     "subject": "Hello",
     "message": "Your message here.",
 }).encode()
-request = urllib.request.Request(f"{BASE}/api/agents/message", data=body, headers={"Content-Type": "application/json"})
+request = urllib.request.Request(f"{BASE}/api/agents/message", data=body, headers={**HEADERS, "Content-Type": "application/json"})
 print(urllib.request.urlopen(request).read().decode())
 ```
 
