@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light dark" />
+    <title>Projects — Zoe Leullier</title>
+    <meta name="description" content="Projects by Zoe Leullier: a commerce platform, an LLM function caller, a maze generator, embedded and C work." />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="stylesheet" href="/src/style.css" />
+  </head>
+  <body>
+    <nav>
+      <a href="/">home</a>
+      <a href="/projects/" aria-current="page">projects</a>
+      <a href="/blog/">blog</a>
+      <a href="mailto:zoe@zoe.dev.br">contact</a>
+    </nav>
+
+    <main>
+      <header>
+        <h1>Projects</h1>
+        <p class="role">What I've built, at work and at 42 São Paulo.</p>
+      </header>
+
+      <ul class="project-cards">
+          <li>
+            <a class="project-card" href="/projects/mobiari/">
+              <div class="stack">
+              <img src="/src/projects/mobiari-customers-card-480.webp" width="480" height="276" alt="Mobiari&#x27;s customer list" loading="lazy" style="background-image: url(data:image/webp;base64,UklGRjAAAABXRUJQVlA4ICQAAACQAQCdASoQAAkAAsBMJaQAAudFvsAA/vUH97NeyUg7QXIHgAA=)" />
+              <img src="/src/projects/mobiari-customer-memory-card-480.webp" width="480" height="276" alt="Mobiari&#x27;s customer memory panel" loading="lazy" style="background-image: url(data:image/webp;base64,UklGRjIAAABXRUJQVlA4ICYAAACwAQCdASoQAAkAAsBMJaQAAudU0ecIAP71QfnrQWuUE4vEYYAAAA==)" />
+              <img src="/src/projects/mobiari-assisted-sale-card-480.webp" width="480" height="276" alt="An assisted sale in Mobiari&#x27;s inbox" loading="lazy" style="background-image: url(data:image/webp;base64,UklGRjAAAABXRUJQVlA4ICQAAACwAQCdASoQAAkAAsBMJaQAAudU0ecIAP71QfnrQWuTnc5xoAA=)" />
+              </div>
+              <div>
+                <h2>Mobiari</h2>
+                <p>An all-in-one commerce platform: an inbox with an AI assistant, sales, stock and native mobile apps. At Develari, with Ari Rocha.</p>
+                <ul class="pills"><li>Rust</li><li>React</li><li>Kotlin</li><li>Swift</li><li>PostgreSQL</li><li>AWS</li></ul>
+              </div>
+            </a>
+          </li>
+          <li>
+            <a class="project-card" href="/projects/call-me-maybe/">
+              <div class="stack">
+              <div class="text-card" aria-hidden="true">{"name": "fn_greet",
+ "parameters": {
+   "name": "string"}}</div>
+              <div class="text-card" aria-hidden="true"><strong>"What is the sum
+of 2 and 3?"</strong></div>
+              <img src="/src/projects/call-me-maybe-run-card-480.webp" width="480" height="212" alt="call me maybe&#x27;s terminal output: each test prompt turned into a function call" loading="lazy" style="background-image: url(data:image/webp;base64,UklGRl4AAABXRUJQVlA4WAoAAAAQAAAADwAABgAAQUxQSBEAAAABD9D/iAgIBAjO1WuI6H8aYwBWUDggJgAAANABAJ0BKhAABwACwEwlnAKwAQ6/oUmAAP7smFaElrO2e96TSYAA)" />
+              </div>
+              <div>
+                <h2>call me maybe</h2>
+                <p>Natural-language requests in, function calls out, from a 0.6B LLM. Constrained decoding makes every output valid JSON.</p>
+                <ul class="pills"><li>Python</li><li>pydantic</li><li>NumPy</li><li>Qwen3-0.6B</li></ul>
+              </div>
+            </a>
+          </li>
+          <li>
+            <a class="project-card" href="/projects/a-maze-ing/">
+              <div class="stack">
+              <img src="/src/projects/a-maze-ing-wilson-576.webp" width="576" height="343" alt="A step-by-step visualizer of Wilson&#x27;s algorithm" loading="lazy" style="background-image: url(data:image/webp;base64,UklGRj4AAABXRUJQVlA4IDIAAACQAQCdASoQAAoAAsBMJZwAAocYJQAA/viM3ZALMXvpl0fcg9t87kXvJv7r+Lf20IAAAA==)" />
+              <img src="/src/projects/a-maze-ing-perfect-576.webp" width="576" height="343" alt="A perfect maze in the terminal interface" loading="lazy" style="background-image: url(data:image/webp;base64,UklGRkIAAABXRUJQVlA4IDYAAADwAQCdASoQAAoAAsBMJZwAAura4eIssgAA/sB9dKyUwwiF/NsynPW6VSi4b3lSn5XuUKwrAAA=)" />
+              <img src="/src/projects/a-maze-ing-pacman-576.webp" width="576" height="343" alt="A Pac-Man board with its shortest path" loading="lazy" style="background-image: url(data:image/webp;base64,UklGRkQAAABXRUJQVlA4IDgAAADQAQCdASoQAAoAAsBMJaQAAt1nkDEQAAD+0Pt1dzUHpdetHKI00FiF2rqjdHwSvZUzx0LzPtBQAA==)" />
+              </div>
+              <div>
+                <h2>A-Maze-ing</h2>
+                <p>A reproducible maze generator with Wilson's algorithm, Pac-Man-style braiding and a terminal interface. With Flora (fpinheir).</p>
+                <ul class="pills"><li>Python</li><li>Textual</li><li>pytest</li><li>mypy</li></ul>
+              </div>
+            </a>
+          </li>
+          <li>
+            <a class="project-card" href="/projects/espion/">
+              <div class="stack">
+              <div class="text-card" aria-hidden="true"><strong>ESP8266</strong></div>
+              <img src="/src/projects/espion-lecteur-card-480.webp" width="480" height="273" alt="A Terminal window running lecteur.py: it finds the CH340 serial port, prints ESPion Connecté, then prints the captured username and password." loading="lazy" style="background-image: url(data:image/webp;base64,UklGRloAAABXRUJQVlA4WAoAAAAQAAAADwAACAAAQUxQSBEAAAABINK28S+6GTw6j4gJ0Ki7FgBWUDggIgAAALABAJ0BKhAACQACwEwlnAAC51KzATAA/vLFCT0dk6UAAAA=)" />
+              <img src="/src/projects/espion-captive-portal-card-480.webp" width="480" height="277" alt="The ESPion captive portal in a browser: a white login card with a coat-of-arms logo, French username and password fields, a terms checkbox, and a disabled Login button, centred on a bright blue page." loading="lazy" style="background-image: url(data:image/webp;base64,UklGRlYAAABXRUJQVlA4IEoAAAAQAgCdASoQAAkAAsBMJbAAdoADJs21oV3gAP7w1LZKZjepie9mwZg8ND2w67Kal3j291uF//6U7g9q5j//g4y4bUNf/8tD9uwAAA==)" />
+              </div>
+              <div>
+                <h2>ESPion</h2>
+                <p>Rogue captive-portal hotspot on a $5 ESP8266, built to demonstrate how easily credentials leak on open Wi-Fi. C++, Arduino, PlatformIO.</p>
+                <ul class="pills"><li>C++</li><li>Arduino</li><li>PlatformIO</li><li>ESP8266</li></ul>
+              </div>
+            </a>
+          </li>
+          <li>
+            <a class="project-card" href="/projects/libft/">
+              <div class="stack">
+              <div class="text-card" aria-hidden="true">t_list *ft_lstmap(t_list *lst,
+    void *(*f)(void *),
+    void (*del)(void *));</div>
+              <div class="text-card" aria-hidden="true">void *ft_memmove(void *dest,
+    const void *src, size_t n);</div>
+              <img src="/src/projects/libft-build-demo-card-480.webp" width="480" height="302" alt="A terminal building libft and running a demo of its functions" loading="lazy" style="background-image: url(data:image/webp;base64,UklGRmIAAABXRUJQVlA4WAoAAAAQAAAADwAACQAAQUxQSBQAAAABUNq2AfP/zV0wqDwiJkCD2n0RAVZQOCAoAAAAsAEAnQEqEAAKAALATCWcAAKdpViDwAD+7yjPpCAS5AlRJozFAoAAAA==)" />
+              </div>
+              <div>
+                <h2>libft</h2>
+                <p>My first C library: 43 libc functions rewritten from scratch, for memory, strings, conversions and linked lists.</p>
+                <ul class="pills"><li>C</li><li>Make</li></ul>
+              </div>
+            </a>
+          </li>
+      </ul>
+    </main>
+
+    <footer>
+      <ul class="links">
+        <li><a href="https://github.com/zoeleu">github</a></li>
+        <li><a href="https://www.linkedin.com/in/zoeleu">linkedin</a></li>
+        <li><a href="/blog/">blog</a></li>
+        <li><a href="mailto:zoe@zoe.dev.br">email</a></li>
+      </ul>
+      <p>© 2026 Zoe Leullier</p>
+    </footer>
+  </body>
+</html>

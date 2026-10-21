@@ -12,6 +12,7 @@
   <body>
     <nav>
       <a href="/">home</a>
+      <a href="/projects/">projects</a>
       <a href="/blog/">blog</a>
       <a href="mailto:zoe@zoe.dev.br">contact</a>
     </nav>
@@ -92,6 +93,36 @@
               v
         lecteur.py  (host-side reader)
         prints the captured username / password</code></pre>
+      </section>
+
+      <section aria-labelledby="screenshots">
+        <h2 id="screenshots">Screenshots</h2>
+        <figure>
+          <img
+            src="/src/projects/espion-captive-portal-576.webp"
+            srcset="/src/projects/espion-captive-portal-576.webp 576w, /src/projects/espion-captive-portal-1152.webp 1152w"
+            sizes="(max-width: 38rem) 100vw, 36rem"
+            width="576"
+            height="344"
+            alt="The ESPion captive portal in a browser: a white login card with a coat-of-arms logo, French username and password fields, a terms checkbox, and a disabled Login button, centred on a bright blue page."
+            loading="lazy"
+            style="background-image: url(data:image/webp;base64,UklGRooAAABXRUJQVlA4WAoAAAAQAAAADwAACQAAQUxQSDAAAAABL6CgbRQ4p+Je8IIXIiJ+DRxUNRBBbTIIYDoI8Gpg+pe5PwUi+j8BOah7GH/MUQBWUDggNAAAALABAJ0BKhAACgAGAIglsAACofcmV4AA/sv7E2ag+sB2kkPBFEDh//7xuV5+MblefxBWAAA=)"
+          />
+          <figcaption>The captive portal served by the ESP8266: a branded login card that keeps Login disabled until the terms box is ticked.</figcaption>
+        </figure>
+        <figure>
+          <img
+            src="/src/projects/espion-lecteur-576.webp"
+            srcset="/src/projects/espion-lecteur-576.webp 576w, /src/projects/espion-lecteur-1152.webp 1152w"
+            sizes="(max-width: 38rem) 100vw, 36rem"
+            width="576"
+            height="356"
+            alt="A Terminal window running lecteur.py: it finds the CH340 serial port, prints ESPion Connecté, then prints the captured username and password."
+            loading="lazy"
+            style="background-image: url(data:image/webp;base64,UklGRowAAABXRUJQVlA4WAoAAAAQAAAADwAACQAAQUxQSEAAAAABX6CmkRQ4e8dPSYkSvBER4THaKcfXhZpIdqqZmEgbD1ERDUigwgUCUEH/x95VKIjo/wSUijoepkn5n9YxzFEAVlA4ICYAAADQAQCdASoQAAoABgCIJZwAAueFU0mvAAD+3HvOWY/efy40FAAAAA==)"
+          />
+          <figcaption>A simulated capture session: the host-side reader finds the CH340 port, waits for the board's STARTED handshake, then prints each submitted credential.</figcaption>
+        </figure>
       </section>
 
       <section aria-labelledby="skills">

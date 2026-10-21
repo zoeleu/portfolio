@@ -268,6 +268,126 @@ figcaption {
   font-size: 0.8rem;
 }
 
+/* Projects index: each project is a stack of rotated cards beside its text */
+
+.project-cards {
+  display: grid;
+  gap: 3.5rem;
+  margin-top: 2.5rem;
+}
+
+.project-card {
+  display: grid;
+  gap: 1.5rem;
+  color: inherit;
+}
+
+.project-card:hover {
+  text-decoration: none;
+}
+
+.project-card h2 {
+  margin: 0 0 0.25rem;
+  font-size: 1.05rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  text-transform: none;
+  color: var(--fg);
+}
+
+.project-card h2::after {
+  content: " →";
+  color: var(--muted);
+}
+
+.project-card p {
+  margin-bottom: 0.75rem;
+  color: var(--muted);
+}
+
+@media (min-width: 38rem) {
+  .project-card {
+    grid-template-columns: 15rem 1fr;
+    align-items: center;
+    gap: 2rem;
+  }
+}
+
+/* The box keeps its size whatever loads inside it, so nothing shifts. */
+.stack {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  max-width: 20rem;
+}
+
+.stack > * {
+  position: absolute;
+  top: 18%;
+  left: 8%;
+  width: 84%;
+  height: auto;
+  aspect-ratio: 576 / 343;
+  margin: 0;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--bg) center / cover;
+  box-shadow: 0 6px 18px rgb(0 0 0 / 0.18);
+  object-fit: cover;
+  object-position: top left;
+  transition: transform 0.25s ease;
+}
+
+/* The last card in the markup is on top. */
+.stack > :nth-child(1) {
+  transform: translate(-6%, 6%) rotate(-8deg);
+}
+
+.stack > :nth-child(2) {
+  transform: translate(6%, -6%) rotate(6deg);
+}
+
+.stack > :nth-child(3) {
+  transform: rotate(-1deg);
+}
+
+.project-card:hover .stack > :nth-child(1),
+.project-card:focus-visible .stack > :nth-child(1) {
+  transform: translate(-12%, 9%) rotate(-12deg);
+}
+
+.project-card:hover .stack > :nth-child(2),
+.project-card:focus-visible .stack > :nth-child(2) {
+  transform: translate(12%, -10%) rotate(9deg);
+}
+
+.project-card:hover .stack > :nth-child(3),
+.project-card:focus-visible .stack > :nth-child(3) {
+  transform: translateY(-3%) rotate(0deg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .stack > * {
+    transition: none;
+  }
+}
+
+/* Cards for projects without screenshots: a short excerpt instead. */
+.text-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0.75rem 0.9rem;
+  font: 0.68rem/1.5 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  white-space: pre;
+  color: var(--muted);
+}
+
+.text-card strong {
+  font: 600 1.1rem/1.2 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  color: var(--fg);
+}
+
 /* Post lists: date column + title */
 
 .posts li {
