@@ -13,5 +13,9 @@ const pages = readdirSync(".", { recursive: true })
 
 export default defineConfig({
   plugins: [cloudflare()],
-  build: { rollupOptions: { input: pages } },
+  build: {
+    rollupOptions: { input: pages },
+    // Keep images as separate files: inlining puts every srcset size in the HTML.
+    assetsInlineLimit: 0,
+  },
 });

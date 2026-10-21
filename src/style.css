@@ -88,6 +88,25 @@ p {
   color: var(--muted);
 }
 
+/* Avatar bubble beside the name and role */
+
+.intro {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.intro .role {
+  margin-bottom: 0;
+}
+
+.avatar {
+  flex: none;
+  border-radius: 50%;
+  background: var(--line);
+}
+
 section {
   margin-top: 3rem;
 }
