@@ -5,6 +5,8 @@ import { connect } from "cloudflare:sockets";
 
 const RECIPIENT = "website@zoe.dev.br";
 const ALLOWED_HOSTNAMES = ["zoe.dev.br", "www.zoe.dev.br"];
+// Matches data-action on the contact page's Turnstile widget.
+const TURNSTILE_ACTION = "contact";
 const LIMITS = { name: 100, subject: 150, message: 5000 };
 
 // Proof of work for AI agents: 24 leading zero bits is about 16.8 million
@@ -68,17 +70,30 @@ async function handleContact(request, env, url) {
   }
 }
 
+// Fails closed: a missing or oversized token, a network error, a timeout, or
+// a token from another site or another form is a failure.
 async function turnstilePassed(token, ip, env) {
-  if (!token) return false;
+  if (!token || token.length > 2048) return false;
   const body = new FormData();
   body.append("secret", env.TURNSTILE_SECRET);
   body.append("response", token);
   if (ip) body.append("remoteip", ip);
-  const response = await fetch("https://challenges.cloudflare.com/turnstile/v0/siteverify", { method: "POST", body });
-  const result = await response.json();
-  // Test keys answer with hostname "example.com", so only real tokens are held to ours.
-  const hostnameOk = ALLOWED_HOSTNAMES.includes(result.hostname) || env.TURNSTILE_SECRET.startsWith("1x0000");
-  return result.success === true && hostnameOk;
+  let result;
+  try {
+    const response = await fetch("https://challenges.cloudflare.com/turnstile/v0/siteverify", {
+      method: "POST",
+      body,
+      signal: AbortSignal.timeout(10_000),
+    });
+    if (!response.ok) return false;
+    result = await response.json();
+  } catch {
+    return false;
+  }
+  // Test keys answer with hostname "example.com" and no action, so only real
+  // tokens are held to ours.
+  if (env.TURNSTILE_SECRET.startsWith("1x0000")) return result.success === true;
+  return result.success === true && result.action === TURNSTILE_ACTION && ALLOWED_HOSTNAMES.includes(result.hostname);
 }
 
 // --- Messages from AI agents, gated by proof of work ----------------------
