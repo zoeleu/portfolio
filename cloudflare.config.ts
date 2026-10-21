@@ -4,6 +4,7 @@ export default defineConfig({
   worker: {
     "name": "portfolio",
     "compatibilityDate": "2026-10-19",
+    "domains": ["zoe.dev.br", "www.zoe.dev.br"],
     "observability": {
       "enabled": true
     },
