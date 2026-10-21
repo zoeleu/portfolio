@@ -13,9 +13,10 @@ const optedOut = navigator.globalPrivacyControl === true || navigator.doNotTrack
 const local = ["localhost", "127.0.0.1", "[::1]"].includes(location.hostname);
 
 async function start() {
-  // The standard build: it downloads the session recorder later, only when
-  // recording is on for the project, through /ingest/static like everything else.
-  const { default: posthog } = await import("posthog-js");
+  // The full build, with the session recorder inside it: ad blockers that match
+  // file names like "posthog-recorder.js" have no separate file to block. It
+  // never downloads extra scripts (disable_external_dependency_loading below).
+  const { default: posthog } = await import("posthog-js/dist/module.full.no-external");
   posthog.init(KEY, {
     api_host: "/ingest",
     ui_host: "https://us.posthog.com",
@@ -31,6 +32,7 @@ async function start() {
     capture_dead_clicks: false,
     capture_performance: false,
     advanced_disable_feature_flags: true,
+    disable_external_dependency_loading: true,
     respect_dnt: true,
   });
 }
