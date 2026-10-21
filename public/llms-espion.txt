@@ -1,0 +1,138 @@
+# ESPion (Zoe Leullier)
+
+> The full text of the ESPion project page, kept separate from https://zoe.dev.br/llms.txt (see the ESPion section there for why). Copied from https://zoe.dev.br/projects/espion/ when the site was last updated; links and images are absolute URLs.
+
+# ESPion
+
+A rogue captive-portal hotspot on a $5 microcontroller, built to show how open Wi-Fi leaks credentials.
+
+Personal · Solo · May 2024
+
+## Languages & tools
+
+- C++
+
+- Arduino
+
+- PlatformIO
+
+- ESP8266
+
+- LittleFS
+
+- ESPAsyncWebServer
+
+- Python
+
+- pyserial
+
+## Overview
+
+ESPion turns an ESP8266 — a microcontroller smaller than a credit card — into a self-contained
+rogue Wi-Fi hotspot. It reproduces an *evil twin* access point with a credential-harvesting
+captive portal, so an abstract risk becomes concrete: a $3–6 device can impersonate a trusted
+network and serve a login page that looks completely legitimate.
+
+There is no internet uplink — the victim never gets online, they only ever reach the attacker's
+portal. The device broadcasts a Wi-Fi network, a catch-all DNS server answers every lookup with
+the ESP's own IP so the operating system's connectivity check auto-launches a sign-in page, and an
+asynchronous web server serves a branded login card from the on-chip filesystem. When the form is
+submitted, the firmware streams the captured credentials out over USB serial, where a companion
+Python script prints them.
+
+I built it as an end-to-end embedded-security exercise and a live demo for security-awareness
+sessions — a point that lands far harder than a slide deck. It spans the whole chain: RF layer,
+DNS, HTTP, front-end UX, and host-side tooling, and shows how an attack threads through all of
+them. The constructive half is what I point to afterwards: why SSIDs aren't identity, why visual
+trust cues are cheap to forge, and the defences that neutralise this.
+
+## Legal & ethical use
+
+ESPion is a security-education tool. It is meant to run only on hardware and networks you own, or
+under documented written authorization — a lab exercise, a sanctioned engagement, a CTF, or a
+classroom demo — and always in an isolated environment where no unsuspecting third party can
+connect. Operating a rogue access point or capturing other people's credentials without consent is
+illegal in most jurisdictions.
+
+## How it works
+
+```
+Victim device
+|
+v
++------------------------------------------------------+
+| ESP8266 hotspot |
+| 1. SoftAP broadcasts a join-able Wi-Fi network |
+| 2. Device joins; OS probes for a captive portal |
+| 3. DNS answers EVERY lookup with the ESP's own IP |
+| 4. Async web server serves the fake login page |
+| 5. Victim submits credentials -> POST /login |
+| 6. Credentials emitted as JSON over USB serial |
++------------------------------------------------------+
+|
+| USB serial @ 115200 baud
+v
+lecteur.py (host-side reader)
+prints the captured username / password
+```
+
+## Screenshots
+
+![The ESPion captive portal in a browser: a white login card with a coat-of-arms logo, French username and password fields, a terms checkbox, and a disabled Login button, centred on a bright blue page.](https://zoe.dev.br/assets/espion-captive-portal-1152-ChZyuerc.webp)
+
+The captive portal served by the ESP8266: a branded login card that keeps Login disabled until the terms box is ticked.
+
+![A Terminal window running lecteur.py: it finds the CH340 serial port, prints ESPion Connecté, then prints the captured username and password.](https://zoe.dev.br/assets/espion-lecteur-1152-D509BI99.webp)
+
+A simulated capture session: the host-side reader finds the CH340 port, waits for the board's STARTED handshake, then prints each submitted credential.
+
+## What it shows
+
+-
+**Embedded firmware in C++**
+
+A SoftAP and a non-blocking asynchronous web server on a severely memory-constrained MCU,
+serving the portal and capturing the `POST /login` fields.
+[`main.cpp`](https://github.com/zoeleu/ESPion/blob/main/src/main.cpp)
+
+-
+**Captive-portal internals**
+
+A catch-all DNS server that resolves every hostname to the device, plus handling of
+OS-specific probe URLs (Windows `connecttest.txt`, `wpad.dat`) so the
+sign-in popup reliably fires.
+[`main.cpp`](https://github.com/zoeleu/ESPion/blob/main/src/main.cpp)
+
+-
+**On-device filesystem & front end**
+
+A branded login page served from LittleFS, trading on cheap trust cues — a logo, a terms
+checkbox, a Login button disabled until it's ticked.
+[`portal.html`](https://github.com/zoeleu/ESPion/blob/main/data/www/portal.html)
+
+-
+**Host-side tooling in Python**
+
+A reader that auto-detects the board's CH340 serial port, waits for the firmware's
+`STARTED` handshake, then parses each JSON line and prints the credentials.
+[`lecteur.py`](https://github.com/zoeleu/ESPion/blob/main/lecteur.py)
+
+-
+**Embedded toolchain**
+
+A PlatformIO project where the firmware and the web assets are built and flashed as two
+separate images (`upload` and `uploadfs`).
+[`platformio.ini`](https://github.com/zoeleu/ESPion/blob/main/platformio.ini)
+
+-
+**Attacker/defender mindset**
+
+Building the offensive artifact to understand, and then articulate, the defences that
+neutralise it — WPA2/WPA3-Enterprise, VPNs, MFA, and never entering real credentials into a
+captive portal.
+
+## Links
+
+-
+[Source on GitHub](https://github.com/zoeleu/ESPion)
+README with the attack chain, hardware, build & flash steps, and the security lesson

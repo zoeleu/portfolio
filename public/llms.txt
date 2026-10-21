@@ -1,10 +1,241 @@
 # Zoe Leullier
 
-> Full-stack developer in São Paulo, Brazil. This is her personal site: projects, a blog, and a way to contact her.
+> Full-stack developer in São Paulo, Brazil. This is her personal site: projects, a blog, and a way to contact her. Everything on the site is in this file, with links and images as absolute URLs.
 
-- [Home](https://zoe.dev.br/): who she is, stack, experience, education
+- [Home](https://zoe.dev.br/)
 - [Projects](https://zoe.dev.br/projects/): Mobiari, call me maybe, A-Maze-ing, ESPion, libft
 - [Blog](https://zoe.dev.br/blog/)
+- [Contact](https://zoe.dev.br/contact/), or the message API for AI agents below
+- [Privacy policy](https://zoe.dev.br/privacy/) ([Portuguese](https://zoe.dev.br/privacidade/))
+
+## About
+
+![Zoe Leullier](https://zoe.dev.br/assets/avatar-168-D-f5ca0m.webp)
+
+Full-stack developer · São Paulo, Brazil
+
+I build thoughtful software with clean architecture, and I ship fast. When I'm not coding, I'm writing about what I learn.
+
+**Stack:** TypeScript, Rust, Bun, React, C, SQL, Linux
+
+**Experience:** Develari, full-stack developer, August 2026 – present
+
+**Education:** 42 São Paulo, software engineering, peer-to-peer curriculum
+
+**Links:** [GitHub](https://github.com/zoeleu) · [LinkedIn](https://www.linkedin.com/in/zoeleu) · [zoe@zoe.dev.br](mailto:zoe@zoe.dev.br)
+
+## Projects
+
+### Mobiari
+
+[Project page](https://zoe.dev.br/projects/mobiari/) · [mobiari.com](https://mobiari.com) (the source code is private)
+
+An all-in-one commerce platform: sell, answer customers and run the back office in one system.
+
+Develari · Full-stack developer · Team of 2, with Ari Rocha · Aug 2026 – present
+
+**Languages & tools:** Rust, axum, PostgreSQL, sqlx, TypeScript, React 19, TanStack Start, Tailwind CSS, Kotlin, Jetpack Compose, Swift, SwiftUI, AWS, OpenTofu, GitHub Actions, OpenTelemetry
+
+**Overview.** Mobiari replaces the stack of separate tools a Brazilian online store usually juggles. One inbox brings in WhatsApp, Instagram, site chat and e-mail, with an AI assistant that answers customers, builds carts and hands over to the team when a person is needed. Behind it sit orders, a point of sale, discounts, catalog, stock and purchasing, NF-e invoicing, an online store with its own theme editor, marketing posts and catalogs, visual automations, and a public API with signed webhooks.
+
+It runs on a Rust backend split into 21 crates, a React web app, and native Android and iOS apps for merchants, deployed to AWS from GitHub Actions. The codebase is about 265,000 lines of Rust, 140,000 of TypeScript, and 70,000 of Kotlin and Swift.
+
+**What I built.** I joined in August 2026, spent the first weeks reading the codebase, and have made 848 commits since September, across the backend, web app, mobile apps and infrastructure. The main pieces:
+
+- **Backend architecture:** split the monolithic backend into a Cargo workspace of 18 layered crates, where each crate only depends on the ones below it, so the compiler enforces the architecture.
+- **Native mobile apps:** started both merchant apps, Kotlin/Compose on Android and SwiftUI on iOS, and wrote about three quarters of their code: sign-in, store switching, the inbox, voice messages with a hold-to-record composer, bulk actions, saved views, AI summaries and push notifications.
+- **Conversations and the AI assistant:** voice note transcription, customer memory the assistant builds from conversations, handing a conversation back to the AI, follow-up sequences for stale leads, and selling tools inside the inbox.
+- **Orders and shipping:** partial shipments, kits that leave in several boxes, and stock holds that survive retries and refunds.
+
+**Screenshots.**
+
+![The inbox: the AI assistant finds a product, fills a cart of 12 items and asks for the customer's WhatsApp, while the side panel shows the assisted sale with payment options.](https://zoe.dev.br/assets/mobiari-assisted-sale-1152-CiRr8CFn.webp)
+An assisted sale in the inbox: the assistant fills the cart, the side panel takes it to payment.
+
+![The same conversation, with the customer memory panel listing facts the assistant noted, each linked to the message it came from.](https://zoe.dev.br/assets/mobiari-customer-memory-1152-D4jblCsy.webp)
+Customer memory: facts the assistant picks up from the conversation, with their source.
+
+![An Instagram conversation with voice notes and transcripts, after the assistant handed the conversation to the team.](https://zoe.dev.br/assets/mobiari-inbox-handoff-1152-ecBEJ_tj.webp)
+Voice notes with transcripts, and a conversation the assistant handed to the team.
+
+![The customers list with lifecycle stages, contact details hidden.](https://zoe.dev.br/assets/mobiari-customers-1152-Dq42-Og9.webp)
+Customers with lifecycle stages. Contact details are hidden here.
+
+**Mobile apps.**
+
+![The iOS app's inbox in dark mode: conversations with channel icons, assignees and an overdue reply warning.](https://zoe.dev.br/assets/mobiari-ios-inbox-560-DZzjgaHh.webp)
+![The Android app's inbox in light mode, with the same conversations and filters for open, mine and unassigned.](https://zoe.dev.br/assets/mobiari-android-inbox-560-BYfEyvew.webp)
+The inbox on iOS (SwiftUI) and Android (Jetpack Compose), from the same API.
+
+![The iOS store assistant answering how sales went this week, after running a sales report tool.](https://zoe.dev.br/assets/mobiari-ios-assistant-560-DV5qr4mj.webp)
+![The Android store assistant answering the same question after running the sales report tool.](https://zoe.dev.br/assets/mobiari-android-assistant-560-cYEOKrY2.webp)
+The store assistant runs a sales report and answers, on both platforms.
+
+![The Android home screen: an assistant prompt, sales today and this month, counts of pending orders, products and customers, and abandoned carts.](https://zoe.dev.br/assets/mobiari-android-overview-560-Bsk1svrq.webp)
+![The iOS product list with stock levels and prices, and a barcode scanner button.](https://zoe.dev.br/assets/mobiari-ios-products-560-B487ULBq.webp)
+The store overview on Android, and the catalog with a barcode scanner on iOS.
+
+**What it shows.**
+
+- **Systems design in Rust:** a layered workspace where crate boundaries enforce dependencies, on axum, sqlx and PostgreSQL with 292 migrations.
+- **Native mobile on two platforms:** the same product in Kotlin with Jetpack Compose and in Swift with SwiftUI, sharing an OpenAPI-generated client contract and error messages.
+- **Applied AI:** an assistant that answers customers, builds carts, remembers facts and knows when to hand over, plus speech-to-text for voice notes.
+- **Shipping to production:** CI that runs per area, deploys to AWS (Graviton, S3, CloudFront) from GitHub Actions, and traces requests with OpenTelemetry.
+- **Agentic coding with Claude:** shipping features faster with AI agents, reviewing AI-written code quickly and carefully, and learning how to steer agents into writing good code.
+
+### call me maybe
+
+[Project page](https://zoe.dev.br/projects/call-me-maybe/) · [Source on GitHub](https://github.com/zoeleu/call_me_maybe): README with the algorithm, design decisions, benchmark and how AI was used
+
+Natural-language requests in, schema-valid function calls out, from a 0.6B model.
+
+42 São Paulo · Solo · October 2026
+
+**Languages & tools:** Python, NumPy, pydantic, Qwen3-0.6B, PyTorch (ROCm), uv, mypy, flake8
+
+**Overview.** Given a list of functions and a prompt such as *"What is the sum of 2 and 3?"*, the program doesn't answer `5`: it returns the function to call and its typed arguments. A model this small, asked to "answer in JSON", fails often, so the project doesn't rely on it behaving.
+
+It drives the model one token at a time and, at every step, only lets it pick tokens that keep the output valid: a real function name, a real parameter name, and a value of the declared type. The program writes the fixed JSON structure itself; the model makes every choice inside it. String and number values go through a small character-level state machine, which lets the model keep using its natural merged tokens like `",` instead of breaking them apart.
+
+Every output is valid JSON by construction. On the sample inputs, all 11 function choices are correct and 10 of 11 calls fully correct. On 302 questions from the Berkeley Function Calling Leaderboard, it made no wrong function choice and no type error, for about 79% strict and 91% lenient accuracy. The 11 samples run in about 25 seconds on an RX 9060 XT.
+
+**Example output.**
+
+```
+fn_add_numbers(a=2.0, b=3.0)
+fn_greet(name="shrek")
+fn_reverse_string(s="hello")
+fn_get_square_root(a=16.0)
+fn_substitute_string_with_regex(source_string="Programming is fun", regex="([aeiou])", replacement="*")
+```
+
+**Screenshot.**
+
+![A Terminal window showing a full call me maybe run: eleven natural-language prompts resolved to function calls, from fn_add_numbers to fn_substitute_string_with_regex.](https://zoe.dev.br/assets/call-me-maybe-run-window-1040-D8WR8Uaq.webp)
+A full run on Apple Silicon (MPS): eleven prompts, each decoded under the function schema.
+
+**What it shows.**
+
+- **How LLMs generate text:** logits, greedy decoding and masking: one generic loop picks the best allowed token at each step, and skips the model entirely when only one token is possible. [`_generate_with()`](https://github.com/zoeleu/call_me_maybe/blob/main/src/decoder.py#L323)
+- **Tokenization:** working with byte-level BPE: decoding every token id once to its real text, and caching which tokens each state allows. [`_value_table()`](https://github.com/zoeleu/call_me_maybe/blob/main/src/decoder.py#L269)
+- **Prompt engineering:** Qwen's native tool-calling format, and few-shot examples aimed at the errors the benchmark revealed (percentages, units). Prompts live in a validated config, not in code. [`prompts.json`](https://github.com/zoeleu/call_me_maybe/blob/main/config/prompts.json)
+- **Validation with pydantic:** function definitions, prompts, results and the prompt config are all pydantic models. [`models.py`](https://github.com/zoeleu/call_me_maybe/blob/main/src/models.py)
+- **Benchmarking and error analysis:** converting a public benchmark, then reading every failure by hand to separate real mistakes from strict scoring. [Performance analysis](https://github.com/zoeleu/call_me_maybe#performance-analysis)
+- **GPU environments:** ROCm builds of PyTorch for two AMD GPU targets, resolved and locked with uv. [`pyproject.toml`](https://github.com/zoeleu/call_me_maybe/blob/main/pyproject.toml)
+
+**How AI was used.** I used Claude Code as a tool I directed, not as an autonomous builder. I designed the project: the generic constrained loop, the prompt config, when to think and when not to, and the benchmark experiments. I wrote the structure, the data models, the file handling, the first version of the decoder, and a first, crude version of the constrained loop, `_generate_with()`.
+
+Claude then worked only on specific requests from me: refactoring my decoder and `_generate_with()` into cleaner functions, implementing pieces I specified (including the character state machine, once I'd found that merged tokens broke string closing), setting up ROCm with uv, and analysing benchmark failures, where I chose which fixes to apply. I reviewed everything that stayed in the project and can explain every line. The full breakdown is in the [README](https://github.com/zoeleu/call_me_maybe#how-ai-was-used).
+
+### A-Maze-ing
+
+[Project page](https://zoe.dev.br/projects/a-maze-ing/) · [Source on GitHub](https://github.com/zoeleu/a-maze-ing): README with the algorithms, design choices and how AI was used
+
+A reproducible maze generator with an interactive terminal interface.
+
+42 São Paulo · Team of 2, with Flora (fpinheir) · Sep – Oct 2026 · GPLv3
+
+**Languages & tools:** Python, Textual, Rich, pytest, mypy, flake8, setuptools, MiniLibX, Make
+
+**Overview.** A-Maze-ing reads a configuration file, generates a random but reproducible maze, writes it out with a hexadecimal wall encoding, and shows it in a terminal interface. Every maze has a closed-off "42" in its centre and comes in two modes: a *perfect* maze with exactly one path between any two cells, or a *Pac-Man board* with loops and no dead ends.
+
+Generation is split in two: a generator (Wilson's algorithm or a recursive backtracker) builds a perfect maze, then a transformer braids it into a board. Both report every step they take, which the interface uses to replay how the maze was built. Mazes go up to 1500 × 1500 cells, built on a background thread with a progress bar and a memory cap, so a huge maze can't freeze the computer.
+
+The generator is a standalone package, `mazegen`, built as a wheel and reusable without the interface. My part: the generation framework and Wilson's algorithm, the braiding transformer, the Textual interface, the Makefile and the packaging.
+
+**Screenshots.**
+
+![The terminal interface showing a 32 by 32 Pac-Man board with the 42 in the centre and the shortest path in red, next to the algorithm list, the config and statistics.](https://zoe.dev.br/assets/a-maze-ing-pacman-1152-BaQriTvf.webp)
+Pac-Man mode, with the shortest path in red: braiding leaves 2 dead ends on a 32 × 32 board.
+
+![The same interface showing a perfect maze, with 304 dead ends and a shortest path of 102 steps.](https://zoe.dev.br/assets/a-maze-ing-perfect-1152-CkBycPKp.webp)
+Perfect mode, from Wilson's algorithm: one path between any two cells, 304 dead ends.
+
+![A step-by-step visualizer of Wilson's algorithm: a random walk with its recorded exits, next to the code line being run.](https://zoe.dev.br/assets/a-maze-ing-wilson-1152-Dtp2uSSk.webp)
+A step-by-step visualizer of Wilson's algorithm, made to understand and explain it.
+
+**What it shows.**
+
+- **Graph algorithms:** Wilson's loop-erased random walk, a depth-first backtracker kept iterative to avoid recursion limits, and a breadth-first search for the shortest path. [`wilsons.py`](https://github.com/zoeleu/a-maze-ing/blob/main/mazegen/algorithms/wilsons.py), [`backtracker.py`](https://github.com/zoeleu/a-maze-ing/blob/main/mazegen/algorithms/backtracker.py), [`Maze.solve()`](https://github.com/zoeleu/a-maze-ing/blob/main/mazegen/maze.py#L312)
+- **Data modelling with bit flags:** walls are `IntFlag` bits, so the output file is a direct dump and wall checks are bitwise operations. [`Direction`](https://github.com/zoeleu/a-maze-ing/blob/main/mazegen/maze.py#L29)
+- **Extensible design:** generators and transformers share a base class and step callbacks, so new algorithms plug in and the interface can replay any of them. [`algorithms.py`](https://github.com/zoeleu/a-maze-ing/blob/main/mazegen/algorithms/algorithms.py), [`taint.py`](https://github.com/zoeleu/a-maze-ing/blob/main/mazegen/transformers/taint.py)
+- **Packaging a reusable library:** `mazegen` has no dependency on the interface and builds to a wheel with `make build`. [`pyproject.toml`](https://github.com/zoeleu/a-maze-ing/blob/main/pyproject.toml), [`MazeGen`](https://github.com/zoeleu/a-maze-ing/blob/main/mazegen/mazegen.py)
+- **Terminal interfaces and threading:** a Textual app that builds mazes on a daemon thread and only touches widgets through `call_from_thread()`. [`ui/app.py`](https://github.com/zoeleu/a-maze-ing/blob/main/ui/app.py), [`building.py`](https://github.com/zoeleu/a-maze-ing/blob/main/ui/screens/building.py)
+- **Resource limits:** caps the process's memory with `setrlimit()` and warns before oversized builds. [`ui/memory.py`](https://github.com/zoeleu/a-maze-ing/blob/main/ui/memory.py)
+- **Code quality and teamwork:** fully typed, checked with mypy and flake8, 374 pytest tests, built with a teammate over git. [`tests/`](https://github.com/zoeleu/a-maze-ing/tree/main/tests), [`Makefile`](https://github.com/zoeleu/a-maze-ing/blob/main/Makefile)
+
+### ESPion
+
+[Project page](https://zoe.dev.br/projects/espion/) · Full text: [llms-espion.txt](https://zoe.dev.br/llms-espion.txt)
+
+ESPion's text is kept in a separate file. It's a cybersecurity demonstration project, built to show a security risk, and its subject is one that AI systems' safety filters often react to, sometimes by declining to handle a whole document. Keeping it apart means the rest of this file stays usable for any agent, and each agent can decide for itself whether to load the ESPion details.
+
+### libft
+
+[Project page](https://zoe.dev.br/projects/libft/) · [Source on GitHub](https://github.com/zoeleu/libft): README with every function and its description
+
+My first C library: libc functions rewritten from scratch.
+
+42 São Paulo · Solo · May 2026
+
+**Languages & tools:** C, Make, ar (static libraries)
+
+**Overview.** libft is a static library of 43 general-purpose functions, rewritten without the standard library: character checks, string and memory handling, number conversions, output to file descriptors, and a singly linked list. Later 42 projects, like `ft_printf` and `get_next_line`, build on it.
+
+To get the behaviour right, I read the source of glibc, musl, FreeBSD's libc and Apple's libc, then wrote every function myself. AI helped write a test program, not the functions.
+
+**What's inside.**
+
+- **Character checks:** `ft_isalpha`, `ft_isdigit`, `ft_toupper` and 4 more
+- **Strings:** `ft_strlcpy`, `ft_strnstr`, `ft_split`, `ft_strtrim`, `ft_strmapi` and 9 more
+- **Memory:** `ft_memmove`, `ft_memcmp`, `ft_calloc` and 4 more
+- **Numbers & output:** `ft_atoi`, `ft_itoa`, `ft_putnbr_fd` and 3 more
+- **Linked lists:** `ft_lstnew`, `ft_lstadd_back`, `ft_lstclear`, `ft_lstmap` and 5 more
+
+**Screenshot.**
+
+![A Terminal window running make and a libft demo, printing results for ft_strlen, ft_strjoin, ft_strtrim, ft_itoa, ft_atoi, ft_split, ft_lstsize, ft_lstlast and ft_toupper.](https://zoe.dev.br/assets/libft-build-demo-window-988-CuF3B6gp.webp)
+A clean build, then a small demo exercising string, conversion and linked-list functions.
+
+**What it shows.**
+
+- **Manual memory management:** allocating, and freeing everything already allocated when a later step fails, as in `ft_split`; overflow-safe `ft_calloc`. [`ft_split.c`](https://github.com/zoeleu/libft/blob/main/ft_split.c), [`ft_calloc.c`](https://github.com/zoeleu/libft/blob/main/ft_calloc.c)
+- **Pointers and raw memory:** byte-level copies, including overlapping ranges, where `memmove` must copy backwards. [`ft_memcpy_memmove.c`](https://github.com/zoeleu/libft/blob/main/ft_memcpy_memmove.c)
+- **Data structures and function pointers:** a generic linked list that takes callbacks to transform and free its content. [`ft_lstmap.c`](https://github.com/zoeleu/libft/blob/main/ft_lstmap.c)
+- **Build tooling:** a Makefile that compiles with `-Wall -Wextra -Werror` and archives a static library. [`Makefile`](https://github.com/zoeleu/libft/blob/main/Makefile)
+- **Reading real-world code:** studying four libc implementations to match edge cases, then writing my own versions.
+
+## Writing
+
+### Hello, world
+
+[Read on the site](https://zoe.dev.br/blog/hello-world/) · September 2, 2026
+
+Welcome to my place on the internet. This first post is a little meta: it's the first page on this site, written as plain HTML.
+
+**Why I started this blog.** I learn best by writing things down, and I've found that what I don't write down is usually gone within a week. So here are the notes.
+
+**A quick code sample.** Below is a code block, written straight into the page:
+
+```ts
+function greet(name: string): string {
+  return `Hello, ${name}!`;
+}
+
+console.log(greet("world"));
+```
+
+**What's next.**
+
+- More posts about the stack I use and the tools around it.
+- Writeups on the open-source projects I maintain.
+- Occasional deep dives into things I find frustrating.
+
+If you'd like to follow along, [follow me on GitHub](https://github.com/zoeleu). Until next time.
+
+## Contact
+
+People can use the form at [zoe.dev.br/contact](https://zoe.dev.br/contact/) (name, optional subject, message), or email [zoe@zoe.dev.br](mailto:zoe@zoe.dev.br).
 
 ## Sending Zoe a message (for AI agents)
 
@@ -22,7 +253,7 @@ Limits: `name` 100 characters, `subject` 150, `message` 5,000. Each challenge se
 
 Responses are JSON. `202` means sent. Errors carry `error` and `detail`: `400` bad input, `401` invalid token, `410` expired challenge, `422` not enough work (the detail shows the hash you produced), `409` challenge already used, `502` sending failed (retry with the same token and nonce).
 
-Send a descriptive `User-Agent` header naming your agent; some default library ones (like Python's `Python-urllib`) are blocked with error 1010. Please say who you are and on whose behalf you're writing. The message is delivered as email and read by a person. HTML is escaped, so send plain text.
+Send a descriptive `User-Agent` header naming your agent. Please say who you are and on whose behalf you're writing. The message is delivered as email and read by a person. HTML is escaped, so send plain text.
 
 ### Solver (Python 3, standard library only)
 
@@ -57,4 +288,6 @@ request = urllib.request.Request(f"{BASE}/api/agents/message", data=body, header
 print(urllib.request.urlopen(request).read().decode())
 ```
 
-People can use the form at [zoe.dev.br/contact](https://zoe.dev.br/contact/) instead.
+## Privacy
+
+The site uses PostHog for analytics, session recordings and heatmaps (no cookies, IP addresses removed, form input never recorded, Do Not Track and Global Privacy Control respected), Cloudflare for hosting and Turnstile on the contact form, and Gmail to deliver messages. Details and your rights under Brazil's LGPD: [privacy policy](https://zoe.dev.br/privacy/) ([em português](https://zoe.dev.br/privacidade/)).
