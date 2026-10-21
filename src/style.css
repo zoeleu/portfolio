@@ -1,0 +1,239 @@
+:root {
+  --bg: #fff;
+  --fg: #111;
+  --muted: #6b6b6b;
+  --line: #e6e6e6;
+  color-scheme: light dark;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #111;
+    --fg: #ededed;
+    --muted: #8f8f8f;
+    --line: #262626;
+  }
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  max-width: 36rem;
+  margin: 0 auto;
+  padding: 2.5rem 1rem 4rem;
+  background: var(--bg);
+  color: var(--fg);
+  font: 400 1rem/1.65 system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+a:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+nav {
+  display: flex;
+  gap: 1.25rem;
+  margin-bottom: 4rem;
+}
+
+h1 {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+h2 {
+  margin: 0 0 0.75rem;
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+p {
+  margin: 0;
+}
+
+.role {
+  margin: 0.25rem 0 1.5rem;
+  color: var(--muted);
+}
+
+section {
+  margin-top: 3rem;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 1rem;
+}
+
+.list li {
+  display: flex;
+  flex-direction: column;
+  padding: 0.6rem 0;
+  border-top: 1px solid var(--line);
+}
+
+.list li:last-child {
+  border-bottom: 1px solid var(--line);
+}
+
+.list a,
+.list strong {
+  font-weight: 500;
+}
+
+.list a::after {
+  content: " ↗";
+  color: var(--muted);
+}
+
+.list span {
+  color: var(--muted);
+}
+
+footer {
+  margin-top: 4rem;
+  color: var(--muted);
+}
+
+.links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
+.links a::before {
+  content: "↗ ";
+}
+
+.links a:hover {
+  color: var(--fg);
+}
+
+.back {
+  margin-top: 3rem;
+  color: var(--muted);
+}
+
+/* Post lists: date column + title */
+
+.posts li {
+  display: flex;
+  gap: 1rem;
+  padding: 0.3rem 0;
+}
+
+.posts time {
+  flex: none;
+  min-width: 9.5rem;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+
+@media (max-width: 30rem) {
+  .posts li {
+    flex-direction: column;
+    gap: 0;
+    padding: 0.5rem 0;
+  }
+}
+
+/* Article body */
+
+.prose > header {
+  margin-bottom: 2rem;
+}
+
+.prose p,
+.prose ul,
+.prose pre {
+  margin: 0 0 1.25rem;
+}
+
+.prose h2,
+.prose h3 {
+  margin: 2.25rem 0 0.75rem;
+  color: var(--fg);
+  letter-spacing: -0.01em;
+  text-transform: none;
+}
+
+.prose h2 {
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.prose h3 {
+  font-size: 1.05rem;
+  font-weight: 600;
+}
+
+.prose ul {
+  list-style: disc;
+  padding-left: 1.25rem;
+}
+
+.prose li + li {
+  margin-top: 0.25rem;
+}
+
+.prose a {
+  text-decoration: underline;
+  text-decoration-color: var(--muted);
+  text-underline-offset: 3px;
+}
+
+.prose a:hover {
+  text-decoration-color: currentColor;
+}
+
+code,
+pre {
+  font: 0.875rem/1.6 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+:not(pre) > code {
+  padding: 0.1em 0.3em;
+  border-radius: 4px;
+  background: var(--line);
+}
+
+pre {
+  overflow-x: auto;
+  padding: 1rem;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+}
