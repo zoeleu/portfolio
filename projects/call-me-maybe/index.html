@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light dark" />
+    <title>call me maybe — Zoe Leullier</title>
+    <meta name="description" content="Turning natural-language requests into schema-valid function calls with a 0.6B LLM and constrained decoding." />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="stylesheet" href="/src/style.css" />
+  </head>
+  <body>
+    <nav>
+      <a href="/">home</a>
+      <a href="/blog/">blog</a>
+      <a href="mailto:zoe@zoe.dev.br">contact</a>
+    </nav>
+
+    <main>
+      <header>
+        <h1>call me maybe</h1>
+        <p class="role">Natural-language requests in, schema-valid function calls out, from a 0.6B model.</p>
+        <p class="meta">42 São Paulo · Solo · October 2026</p>
+      </header>
+
+      <section aria-labelledby="stack">
+        <h2 id="stack">Languages &amp; tools</h2>
+        <ul class="pills">
+          <li>Python</li>
+          <li>NumPy</li>
+          <li>pydantic</li>
+          <li>Qwen3-0.6B</li>
+          <li>PyTorch (ROCm)</li>
+          <li>uv</li>
+          <li>mypy</li>
+          <li>flake8</li>
+        </ul>
+      </section>
+
+      <section aria-labelledby="overview" class="overview">
+        <h2 id="overview">Overview</h2>
+        <p>
+          Given a list of functions and a prompt such as <em>"What is the sum of 2 and 3?"</em>, the
+          program doesn't answer <code>5</code>: it returns the function to call and its typed arguments.
+          A model this small, asked to "answer in JSON", fails often, so the project doesn't rely on it
+          behaving.
+        </p>
+        <p>
+          It drives the model one token at a time and, at every step, only lets it pick tokens that keep
+          the output valid: a real function name, a real parameter name, and a value of the declared
+          type. The program writes the fixed JSON structure itself; the model makes every choice inside
+          it. String and number values go through a small character-level state machine, which lets the
+          model keep using its natural merged tokens like <code>",</code> instead of breaking them apart.
+        </p>
+        <p>
+          Every output is valid JSON by construction. On the sample inputs, all 11 function choices are
+          correct and 10 of 11 calls fully correct. On 302 questions from the Berkeley Function Calling
+          Leaderboard, it made no wrong function choice and no type error, for about 79% strict and 91%
+          lenient accuracy. The 11 samples run in about 25 seconds on an RX 9060 XT.
+        </p>
+      </section>
+
+      <section aria-labelledby="example">
+        <h2 id="example">Example output</h2>
+        <pre><code>fn_add_numbers(a=2.0, b=3.0)
+fn_greet(name="shrek")
+fn_reverse_string(s="hello")
+fn_get_square_root(a=16.0)
+fn_substitute_string_with_regex(source_string="Programming is fun", regex="([aeiou])", replacement="*")</code></pre>
+      </section>
+
+      <section aria-labelledby="skills">
+        <h2 id="skills">What it shows</h2>
+        <ul class="skills">
+          <li>
+            <strong>How LLMs generate text</strong>
+            <p>
+              Logits, greedy decoding and masking: one generic loop picks the best allowed token at each
+              step, and skips the model entirely when only one token is possible.
+              <a href="https://github.com/zoeleu/call_me_maybe/blob/main/src/decoder.py#L323"><code>_generate_with()</code></a>
+            </p>
+          </li>
+          <li>
+            <strong>Tokenization</strong>
+            <p>
+              Working with byte-level BPE: decoding every token id once to its real text, and caching which
+              tokens each state allows.
+              <a href="https://github.com/zoeleu/call_me_maybe/blob/main/src/decoder.py#L269"><code>_value_table()</code></a>
+            </p>
+          </li>
+          <li>
+            <strong>Prompt engineering</strong>
+            <p>
+              Qwen's native tool-calling format, and few-shot examples aimed at the errors the benchmark
+              revealed (percentages, units). Prompts live in a validated config, not in code.
+              <a href="https://github.com/zoeleu/call_me_maybe/blob/main/config/prompts.json"><code>prompts.json</code></a>
+            </p>
+          </li>
+          <li>
+            <strong>Validation with pydantic</strong>
+            <p>
+              Function definitions, prompts, results and the prompt config are all pydantic models.
+              <a href="https://github.com/zoeleu/call_me_maybe/blob/main/src/models.py"><code>models.py</code></a>
+            </p>
+          </li>
+          <li>
+            <strong>Benchmarking and error analysis</strong>
+            <p>
+              Converting a public benchmark, then reading every failure by hand to separate real mistakes
+              from strict scoring.
+              <a href="https://github.com/zoeleu/call_me_maybe#performance-analysis">Performance analysis</a>
+            </p>
+          </li>
+          <li>
+            <strong>GPU environments</strong>
+            <p>
+              ROCm builds of PyTorch for two AMD GPU targets, resolved and locked with uv.
+              <a href="https://github.com/zoeleu/call_me_maybe/blob/main/pyproject.toml"><code>pyproject.toml</code></a>
+            </p>
+          </li>
+        </ul>
+      </section>
+
+      <section aria-labelledby="ai" class="overview">
+        <h2 id="ai">How AI was used</h2>
+        <p>
+          I used Claude Code as a tool I directed, not as an autonomous builder. I designed the
+          project: the generic constrained loop, the prompt config, when to think and when not to, and
+          the benchmark experiments. I wrote the structure, the data models, the file handling, the
+          first version of the decoder, and a first, crude version of the constrained loop,
+          <code>_generate_with()</code>.
+        </p>
+        <p>
+          Claude then worked only on specific requests from me: refactoring my decoder and
+          <code>_generate_with()</code> into cleaner functions, implementing pieces I specified
+          (including the character state machine, once I'd found that merged tokens broke string
+          closing), setting up ROCm with uv, and analysing benchmark failures, where I chose which fixes
+          to apply. I reviewed everything that stayed
+          in the project and can explain every line. The full breakdown is in the
+          <a href="https://github.com/zoeleu/call_me_maybe#how-ai-was-used">README</a>.
+        </p>
+      </section>
+
+      <section aria-labelledby="links">
+        <h2 id="links">Links</h2>
+        <ul class="list">
+          <li>
+            <a href="https://github.com/zoeleu/call_me_maybe">Source on GitHub</a>
+            <span>README with the algorithm, design decisions, benchmark and how AI was used</span>
+          </li>
+        </ul>
+      </section>
+
+      <p class="back"><a href="/">← back home</a></p>
+    </main>
+
+    <footer>
+      <ul class="links">
+        <li><a href="https://github.com/zoeleu">github</a></li>
+        <li><a href="https://www.linkedin.com/in/zoeleu">linkedin</a></li>
+        <li><a href="/blog/">blog</a></li>
+        <li><a href="mailto:zoe@zoe.dev.br">email</a></li>
+      </ul>
+      <p>© 2026 Zoe Leullier</p>
+    </footer>
+  </body>
+</html>

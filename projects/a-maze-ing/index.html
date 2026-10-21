@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light dark" />
+    <title>A-Maze-ing — Zoe Leullier</title>
+    <meta name="description" content="A reproducible maze generator in Python with Wilson's algorithm, Pac-Man-style braiding and an interactive terminal interface." />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="stylesheet" href="/src/style.css" />
+  </head>
+  <body>
+    <nav>
+      <a href="/">home</a>
+      <a href="/blog/">blog</a>
+      <a href="mailto:zoe@zoe.dev.br">contact</a>
+    </nav>
+
+    <main>
+      <header>
+        <h1>A-Maze-ing</h1>
+        <p class="role">A reproducible maze generator with an interactive terminal interface.</p>
+        <p class="meta">42 São Paulo · Team of 2, with Flora (fpinheir) · Sep – Oct 2026 · GPLv3</p>
+      </header>
+
+      <section aria-labelledby="stack">
+        <h2 id="stack">Languages &amp; tools</h2>
+        <ul class="pills">
+          <li>Python</li>
+          <li>Textual</li>
+          <li>Rich</li>
+          <li>pytest</li>
+          <li>mypy</li>
+          <li>flake8</li>
+          <li>setuptools</li>
+          <li>MiniLibX</li>
+          <li>Make</li>
+        </ul>
+      </section>
+
+      <section aria-labelledby="overview" class="overview">
+        <h2 id="overview">Overview</h2>
+        <p>
+          A-Maze-ing reads a configuration file, generates a random but reproducible maze, writes it
+          out with a hexadecimal wall encoding, and shows it in a terminal interface. Every maze has a
+          closed-off "42" in its centre and comes in two modes: a <em>perfect</em> maze with exactly one
+          path between any two cells, or a <em>Pac-Man board</em> with loops and no dead ends.
+        </p>
+        <p>
+          Generation is split in two: a generator (Wilson's algorithm or a recursive backtracker) builds a
+          perfect maze, then a transformer braids it into a board. Both report every step they take,
+          which the interface uses to replay how the maze was built. Mazes go up to 1500 × 1500 cells,
+          built on a background thread with a progress bar and a memory cap, so a huge maze can't freeze
+          the computer.
+        </p>
+        <p>
+          The generator is a standalone package, <code>mazegen</code>, built as a wheel and reusable
+          without the interface. My part: the generation framework and Wilson's algorithm, the braiding
+          transformer, the Textual interface, the Makefile and the packaging.
+        </p>
+      </section>
+
+      <section aria-labelledby="screenshots">
+        <h2 id="screenshots">Screenshots</h2>
+        <figure>
+          <img
+            src="/src/projects/a-maze-ing-pacman-576.webp"
+            srcset="/src/projects/a-maze-ing-pacman-576.webp 576w, /src/projects/a-maze-ing-pacman-1152.webp 1152w"
+            sizes="(max-width: 38rem) 100vw, 36rem"
+            width="576"
+            height="366"
+            alt="The terminal interface showing a 32 by 32 Pac-Man board with the 42 in the centre and the shortest path in red, next to the algorithm list, the config and statistics."
+            loading="lazy"
+          />
+          <figcaption>Pac-Man mode, with the shortest path in red: braiding leaves 2 dead ends on a 32 × 32 board.</figcaption>
+        </figure>
+        <figure>
+          <img
+            src="/src/projects/a-maze-ing-perfect-576.webp"
+            srcset="/src/projects/a-maze-ing-perfect-576.webp 576w, /src/projects/a-maze-ing-perfect-1152.webp 1152w"
+            sizes="(max-width: 38rem) 100vw, 36rem"
+            width="576"
+            height="366"
+            alt="The same interface showing a perfect maze, with 304 dead ends and a shortest path of 102 steps."
+            loading="lazy"
+          />
+          <figcaption>Perfect mode, from Wilson's algorithm: one path between any two cells, 304 dead ends.</figcaption>
+        </figure>
+        <figure>
+          <img
+            src="/src/projects/a-maze-ing-wilson-576.webp"
+            srcset="/src/projects/a-maze-ing-wilson-576.webp 576w, /src/projects/a-maze-ing-wilson-1152.webp 1152w"
+            sizes="(max-width: 38rem) 100vw, 36rem"
+            width="576"
+            height="371"
+            alt="A step-by-step visualizer of Wilson's algorithm: a random walk with its recorded exits, next to the code line being run."
+            loading="lazy"
+          />
+          <figcaption>A step-by-step visualizer of Wilson's algorithm, made to understand and explain it.</figcaption>
+        </figure>
+      </section>
+
+      <section aria-labelledby="skills">
+        <h2 id="skills">What it shows</h2>
+        <ul class="skills">
+          <li>
+            <strong>Graph algorithms</strong>
+            <p>
+              Wilson's loop-erased random walk, a depth-first backtracker kept iterative to avoid
+              recursion limits, and a breadth-first search for the shortest path.
+              <a href="https://github.com/zoeleu/a-maze-ing/blob/main/mazegen/algorithms/wilsons.py"><code>wilsons.py</code></a>,
+              <a href="https://github.com/zoeleu/a-maze-ing/blob/main/mazegen/algorithms/backtracker.py"><code>backtracker.py</code></a>,
+              <a href="https://github.com/zoeleu/a-maze-ing/blob/main/mazegen/maze.py#L312"><code>Maze.solve()</code></a>
+            </p>
+          </li>
+          <li>
+            <strong>Data modelling with bit flags</strong>
+            <p>
+              Walls are <code>IntFlag</code> bits, so the output file is a direct dump and wall checks are
+              bitwise operations.
+              <a href="https://github.com/zoeleu/a-maze-ing/blob/main/mazegen/maze.py#L29"><code>Direction</code></a>
+            </p>
+          </li>
+          <li>
+            <strong>Extensible design</strong>
+            <p>
+              Generators and transformers share a base class and step callbacks, so new algorithms plug in
+              and the interface can replay any of them.
+              <a href="https://github.com/zoeleu/a-maze-ing/blob/main/mazegen/algorithms/algorithms.py"><code>algorithms.py</code></a>,
+              <a href="https://github.com/zoeleu/a-maze-ing/blob/main/mazegen/transformers/taint.py"><code>taint.py</code></a>
+            </p>
+          </li>
+          <li>
+            <strong>Packaging a reusable library</strong>
+            <p>
+              <code>mazegen</code> has no dependency on the interface and builds to a wheel with
+              <code>make build</code>.
+              <a href="https://github.com/zoeleu/a-maze-ing/blob/main/pyproject.toml"><code>pyproject.toml</code></a>,
+              <a href="https://github.com/zoeleu/a-maze-ing/blob/main/mazegen/mazegen.py"><code>MazeGen</code></a>
+            </p>
+          </li>
+          <li>
+            <strong>Terminal interfaces and threading</strong>
+            <p>
+              A Textual app that builds mazes on a daemon thread and only touches widgets through
+              <code>call_from_thread()</code>.
+              <a href="https://github.com/zoeleu/a-maze-ing/blob/main/ui/app.py"><code>ui/app.py</code></a>,
+              <a href="https://github.com/zoeleu/a-maze-ing/blob/main/ui/screens/building.py"><code>building.py</code></a>
+            </p>
+          </li>
+          <li>
+            <strong>Resource limits</strong>
+            <p>
+              Caps the process's memory with <code>setrlimit()</code> and warns before oversized builds.
+              <a href="https://github.com/zoeleu/a-maze-ing/blob/main/ui/memory.py"><code>ui/memory.py</code></a>
+            </p>
+          </li>
+          <li>
+            <strong>Code quality and teamwork</strong>
+            <p>
+              Fully typed, checked with mypy and flake8, 374 pytest tests, built with a teammate over git.
+              <a href="https://github.com/zoeleu/a-maze-ing/tree/main/tests"><code>tests/</code></a>,
+              <a href="https://github.com/zoeleu/a-maze-ing/blob/main/Makefile"><code>Makefile</code></a>
+            </p>
+          </li>
+        </ul>
+      </section>
+
+      <section aria-labelledby="links">
+        <h2 id="links">Links</h2>
+        <ul class="list">
+          <li>
+            <a href="https://github.com/zoeleu/a-maze-ing">Source on GitHub</a>
+            <span>README with the algorithms, design choices and how AI was used</span>
+          </li>
+        </ul>
+      </section>
+
+      <p class="back"><a href="/">← back home</a></p>
+    </main>
+
+    <footer>
+      <ul class="links">
+        <li><a href="https://github.com/zoeleu">github</a></li>
+        <li><a href="https://www.linkedin.com/in/zoeleu">linkedin</a></li>
+        <li><a href="/blog/">blog</a></li>
+        <li><a href="mailto:zoe@zoe.dev.br">email</a></li>
+      </ul>
+      <p>© 2026 Zoe Leullier</p>
+    </footer>
+  </body>
+</html>

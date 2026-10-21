@@ -1,0 +1,98 @@
+<!doctype html>
+<!--
+  Template for a project page. Copy it to projects/<slug>/index.html (only
+  files named index.html are built), fill it in, then point the project's link
+  on the home page at /projects/<slug>/. Screenshots go in src/projects/ as
+  576px and 1152px WebP files. See projects/a-maze-ing/ for a full example.
+-->
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light dark" />
+    <title>PROJECT NAME — Zoe Leullier</title>
+    <meta name="description" content="ONE SENTENCE FOR SEARCH RESULTS" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="stylesheet" href="/src/style.css" />
+  </head>
+  <body>
+    <nav>
+      <a href="/">home</a>
+      <a href="/blog/">blog</a>
+      <a href="mailto:zoe@zoe.dev.br">contact</a>
+    </nav>
+
+    <main>
+      <header>
+        <h1>PROJECT NAME</h1>
+        <p class="role">ONE-LINE SUMMARY</p>
+        <p class="meta">WHERE · SOLO OR TEAM · WHEN</p>
+      </header>
+
+      <section aria-labelledby="stack">
+        <h2 id="stack">Languages &amp; tools</h2>
+        <ul class="pills">
+          <li>LANGUAGE</li>
+          <li>TOOL</li>
+        </ul>
+      </section>
+
+      <section aria-labelledby="overview" class="overview">
+        <h2 id="overview">Overview</h2>
+        <p>WHAT IT DOES AND HOW.</p>
+        <p>RESULTS, AND WHAT YOUR PART WAS.</p>
+      </section>
+
+      <section aria-labelledby="screenshots">
+        <h2 id="screenshots">Screenshots</h2>
+        <figure>
+          <img
+            src="/src/projects/NAME-576.webp"
+            srcset="/src/projects/NAME-576.webp 576w, /src/projects/NAME-1152.webp 1152w"
+            sizes="(max-width: 38rem) 100vw, 36rem"
+            width="576"
+            height="HEIGHT AT 576 WIDE"
+            alt="WHAT THE SCREENSHOT SHOWS"
+            loading="lazy"
+          />
+          <figcaption>CAPTION</figcaption>
+        </figure>
+      </section>
+
+      <section aria-labelledby="skills">
+        <h2 id="skills">What it shows</h2>
+        <ul class="skills">
+          <li>
+            <strong>SKILL</strong>
+            <p>
+              HOW THE PROJECT SHOWS IT.
+              <a href="https://github.com/zoeleu/REPO/blob/main/FILE"><code>FILE</code></a>
+            </p>
+          </li>
+        </ul>
+      </section>
+
+      <section aria-labelledby="links">
+        <h2 id="links">Links</h2>
+        <ul class="list">
+          <li>
+            <a href="https://github.com/zoeleu/REPO">Source on GitHub</a>
+            <span>WHAT THE README COVERS</span>
+          </li>
+        </ul>
+      </section>
+
+      <p class="back"><a href="/">← back home</a></p>
+    </main>
+
+    <footer>
+      <ul class="links">
+        <li><a href="https://github.com/zoeleu">github</a></li>
+        <li><a href="https://www.linkedin.com/in/zoeleu">linkedin</a></li>
+        <li><a href="/blog/">blog</a></li>
+        <li><a href="mailto:zoe@zoe.dev.br">email</a></li>
+      </ul>
+      <p>© 2026 Zoe Leullier</p>
+    </footer>
+  </body>
+</html>

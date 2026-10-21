@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light dark" />
+    <title>libft — Zoe Leullier</title>
+    <meta name="description" content="A from-scratch reimplementation of libc functions in C: memory, strings, conversions, output and linked lists." />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="stylesheet" href="/src/style.css" />
+  </head>
+  <body>
+    <nav>
+      <a href="/">home</a>
+      <a href="/blog/">blog</a>
+      <a href="mailto:zoe@zoe.dev.br">contact</a>
+    </nav>
+
+    <main>
+      <header>
+        <h1>libft</h1>
+        <p class="role">My first C library: libc functions rewritten from scratch.</p>
+        <p class="meta">42 São Paulo · Solo · May 2026</p>
+      </header>
+
+      <section aria-labelledby="stack">
+        <h2 id="stack">Languages &amp; tools</h2>
+        <ul class="pills">
+          <li>C</li>
+          <li>Make</li>
+          <li>ar (static libraries)</li>
+        </ul>
+      </section>
+
+      <section aria-labelledby="overview" class="overview">
+        <h2 id="overview">Overview</h2>
+        <p>
+          libft is a static library of 43 general-purpose functions, rewritten without the standard
+          library: character checks, string and memory handling, number conversions, output to file
+          descriptors, and a singly linked list. Later 42 projects, like <code>ft_printf</code> and
+          <code>get_next_line</code>, build on it.
+        </p>
+        <p>
+          To get the behaviour right, I read the source of glibc, musl, FreeBSD's libc and Apple's libc,
+          then wrote every function myself. AI helped write a test program, not the functions.
+        </p>
+      </section>
+
+      <section aria-labelledby="functions">
+        <h2 id="functions">What's inside</h2>
+        <ul class="list">
+          <li>
+            <strong>Character checks</strong>
+            <span><code>ft_isalpha</code>, <code>ft_isdigit</code>, <code>ft_toupper</code> and 4 more</span>
+          </li>
+          <li>
+            <strong>Strings</strong>
+            <span><code>ft_strlcpy</code>, <code>ft_strnstr</code>, <code>ft_split</code>, <code>ft_strtrim</code>, <code>ft_strmapi</code> and 9 more</span>
+          </li>
+          <li>
+            <strong>Memory</strong>
+            <span><code>ft_memmove</code>, <code>ft_memcmp</code>, <code>ft_calloc</code> and 4 more</span>
+          </li>
+          <li>
+            <strong>Numbers &amp; output</strong>
+            <span><code>ft_atoi</code>, <code>ft_itoa</code>, <code>ft_putnbr_fd</code> and 3 more</span>
+          </li>
+          <li>
+            <strong>Linked lists</strong>
+            <span><code>ft_lstnew</code>, <code>ft_lstadd_back</code>, <code>ft_lstclear</code>, <code>ft_lstmap</code> and 5 more</span>
+          </li>
+        </ul>
+      </section>
+
+      <section aria-labelledby="skills">
+        <h2 id="skills">What it shows</h2>
+        <ul class="skills">
+          <li>
+            <strong>Manual memory management</strong>
+            <p>
+              Allocating, and freeing everything already allocated when a later step fails, as in
+              <code>ft_split</code>; overflow-safe <code>ft_calloc</code>.
+              <a href="https://github.com/zoeleu/libft/blob/main/ft_split.c"><code>ft_split.c</code></a>,
+              <a href="https://github.com/zoeleu/libft/blob/main/ft_calloc.c"><code>ft_calloc.c</code></a>
+            </p>
+          </li>
+          <li>
+            <strong>Pointers and raw memory</strong>
+            <p>
+              Byte-level copies, including overlapping ranges, where <code>memmove</code> must copy
+              backwards.
+              <a href="https://github.com/zoeleu/libft/blob/main/ft_memcpy_memmove.c"><code>ft_memcpy_memmove.c</code></a>
+            </p>
+          </li>
+          <li>
+            <strong>Data structures and function pointers</strong>
+            <p>
+              A generic linked list that takes callbacks to transform and free its content.
+              <a href="https://github.com/zoeleu/libft/blob/main/ft_lstmap.c"><code>ft_lstmap.c</code></a>
+            </p>
+          </li>
+          <li>
+            <strong>Build tooling</strong>
+            <p>
+              A Makefile that compiles with <code>-Wall -Wextra -Werror</code> and archives a static
+              library.
+              <a href="https://github.com/zoeleu/libft/blob/main/Makefile"><code>Makefile</code></a>
+            </p>
+          </li>
+          <li>
+            <strong>Reading real-world code</strong>
+            <p>
+              Studying four libc implementations to match edge cases, then writing my own versions.
+            </p>
+          </li>
+        </ul>
+      </section>
+
+      <section aria-labelledby="links">
+        <h2 id="links">Links</h2>
+        <ul class="list">
+          <li>
+            <a href="https://github.com/zoeleu/libft">Source on GitHub</a>
+            <span>README with every function and its description</span>
+          </li>
+        </ul>
+      </section>
+
+      <p class="back"><a href="/">← back home</a></p>
+    </main>
+
+    <footer>
+      <ul class="links">
+        <li><a href="https://github.com/zoeleu">github</a></li>
+        <li><a href="https://www.linkedin.com/in/zoeleu">linkedin</a></li>
+        <li><a href="/blog/">blog</a></li>
+        <li><a href="mailto:zoe@zoe.dev.br">email</a></li>
+      </ul>
+      <p>© 2026 Zoe Leullier</p>
+    </footer>
+  </body>
+</html>
