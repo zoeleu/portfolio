@@ -27,3 +27,13 @@ dist-ssr
 .claude/
 github-cleanup/
 ESPion-README.md
+
+# wrangler files
+.wrangler
+.dev.vars*
+!.dev.vars.example
+.env*
+!.env.example
+
+# cf build output
+.cloudflare/

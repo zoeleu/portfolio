@@ -1,0 +1,39 @@
+name: Deploy
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-${{ github.ref }}
+  cancel-in-progress: false
+
+env:
+  CF_SEND_TELEMETRY: "false"
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # Bun installs dependencies and runs Vite; cf itself needs Node 22.18+.
+      - uses: oven-sh/setup-bun@v2
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+
+      - run: bun install --frozen-lockfile
+      - run: npx cf build
+
+      # Checks the build on every run, including pull requests, without credentials.
+      - run: npx cf deploy --prebuilt --mode production --dry-run
+
+      - name: Deploy to Cloudflare Workers
+        if: github.event_name != 'pull_request'
+        run: npx cf deploy --prebuilt --mode production
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
