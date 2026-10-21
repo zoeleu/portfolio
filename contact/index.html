@@ -44,8 +44,14 @@
           <textarea name="message" rows="8" maxlength="5000" required></textarea>
         </label>
         <!-- Hidden unless Turnstile is unsure about the visitor; then a checkbox appears here. -->
-        <div class="cf-turnstile" data-sitekey="0x4AAAAAAFeu3lvWkucprWxS" data-action="contact" data-appearance="interaction-only"></div>
-        <button type="submit">Send</button>
+        <div class="cf-turnstile" data-sitekey="0x4AAAAAAFeu3lvWkucprWxS" data-action="contact" data-appearance="interaction-only" data-callback="turnstileDone" data-expired-callback="turnstileWait" data-error-callback="turnstileWait"></div>
+        <!-- Send stays disabled until Turnstile has a token, so the form never posts without one. -->
+        <script>
+          const send = (enabled) => (document.querySelector(".contact button").disabled = !enabled);
+          function turnstileDone() { send(true); }
+          function turnstileWait() { send(false); }
+        </script>
+        <button type="submit" disabled>Send</button>
       </form>
     </main>
 

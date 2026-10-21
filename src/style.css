@@ -454,6 +454,11 @@ figcaption {
   opacity: 0.85;
 }
 
+.contact button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
 .fine-print {
   margin-top: 0.5rem;
   font-size: 0.75rem;
