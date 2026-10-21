@@ -431,6 +431,14 @@ figcaption {
   resize: vertical;
 }
 
+/* Turnstile's checkbox is 65px tall and appears only when needed: reserve
+   exactly that, so nothing below it moves when it shows up. line-height: 0
+   stops the inline iframe adding a text baseline gap under it. */
+.contact .cf-turnstile {
+  height: 65px;
+  line-height: 0;
+}
+
 .contact input:focus-visible,
 .contact textarea:focus-visible,
 .contact button:focus-visible {

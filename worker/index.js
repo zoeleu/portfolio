@@ -31,9 +31,26 @@ export default {
       }
       return handle();
     }
+    if (url.pathname.startsWith("/ingest/")) return proxyPostHog(request, url);
     return env.ASSETS.fetch(request);
   },
 };
+
+// PostHog through this site: no third-party connection for the browser, and
+// the visitor's IP address and cookies never reach PostHog (it sees the
+// address of the Cloudflare server that forwards the event).
+async function proxyPostHog(request, url) {
+  const path = url.pathname.slice("/ingest".length);
+  const host = path.startsWith("/static/") ? "us-assets.i.posthog.com" : "us.i.posthog.com";
+  const upstream = new URL(path + url.search, `https://${host}`);
+  const headers = new Headers(request.headers);
+  for (const name of ["cookie", "cf-connecting-ip", "x-forwarded-for", "x-real-ip", "true-client-ip"]) headers.delete(name);
+  return fetch(upstream, {
+    method: request.method,
+    headers,
+    body: ["GET", "HEAD"].includes(request.method) ? undefined : request.body,
+  });
+}
 
 // On localhost, log the email instead of contacting Gmail, so local tests never
 // log in anywhere. Keyed on the request's host, not on a variable that could

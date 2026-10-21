@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light dark" />
+    <title>Privacy policy — Zoe Leullier</title>
+    <meta name="description" content="How zoe.dev.br handles personal data, under Brazil's LGPD." />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="alternate" hreflang="pt-BR" href="https://zoe.dev.br/privacidade/" />
+    <link rel="stylesheet" href="/src/style.css" />
+    <!-- Fetch every page on this site right away, and fully render one as soon as its link is hovered (except the contact pages, so Turnstile only runs when the form is really opened). JSON read by the browser, not JavaScript. -->
+    <script type="speculationrules">
+      { "prefetch": [{ "where": { "href_matches": "/*" }, "eagerness": "immediate" }], "prerender": [{ "where": { "and": [{ "href_matches": "/*" }, { "not": { "href_matches": "/contact/*" } }] }, "eagerness": "eager" }] }
+    </script>
+    <script type="module" src="/src/preload.js"></script>
+    <script type="module" src="/src/analytics.js"></script>
+  </head>
+  <body>
+    <nav>
+      <a href="/">home</a>
+      <a href="/projects/">projects</a>
+      <a href="/blog/">blog</a>
+      <a href="/contact/">contact</a>
+    </nav>
+
+    <main>
+      <article class="prose">
+        <header>
+          <h1>Privacy policy</h1>
+          <p class="role">Last updated October 21, 2026</p>
+        </header>
+
+        <p>
+          This policy explains what personal data zoe.dev.br processes, why, and your rights under
+          Brazil's General Data Protection Law (LGPD, Lei nº 13.709/2018).
+        </p>
+
+        <h2 id="controller">Who is responsible</h2>
+        <p>
+          Zoe Leullier, São Paulo, Brazil, is the controller of the data described here. Contact:
+          <a href="mailto:zoe@zoe.dev.br">zoe@zoe.dev.br</a>. As a small-scale processing agent, I haven't
+          appointed a data protection officer (Resolução CD/ANPD nº 2/2022); write to me directly about
+          anything in this policy.
+        </p>
+
+        <h2 id="data">What is collected</h2>
+        <h3>Analytics (PostHog)</h3>
+        <p>
+          After a page has loaded, the site sends PostHog usage data: the pages you view, the links and
+          buttons you click, how long you stay, the page you came from, and your browser, operating system
+          and screen size. Events go through this site, which removes your IP address before passing them
+          on, so PostHog only sees the address of the Cloudflare server that forwards them. No cookies are
+          set: a random ID is kept in your browser's session storage and deleted when you close the tab.
+          Nothing is sent if your browser sends Do Not Track or Global Privacy Control.
+        </p>
+        <h3>Cloudflare</h3>
+        <p>
+          The site is hosted on Cloudflare, which processes your IP address and request details to deliver
+          pages and protect the site, and keeps short-lived logs. Cloudflare Web Analytics counts visits and
+          page speed without cookies.
+        </p>
+        <h3>Contact form and messages from AI agents</h3>
+        <p>
+          When you send a message, the site processes your name, the subject and the message, and emails
+          them to me through Gmail (Google). On the contact page, Cloudflare Turnstile checks that you're
+          human using signals from your browser and device; see the
+          <a href="https://www.cloudflare.com/en-gb/turnstile-privacy-policy/">Turnstile privacy policy</a>.
+          AI agents that write through the API send the same three fields; the site only stores the ID of
+          each solved challenge, briefly, so it can't be reused.
+        </p>
+
+        <h2 id="purposes">Why, and on what legal basis</h2>
+        <ul>
+          <li><strong>Analytics:</strong> understanding which pages are useful, to improve the site. Legitimate interest (LGPD art. 7, IX), with low impact: no cookies, no IP address, and Do Not Track respected.</li>
+          <li><strong>Hosting and security:</strong> delivering the site and blocking abuse. Legitimate interest (art. 7, IX).</li>
+          <li><strong>Messages:</strong> reading and answering what you send me, at your request. Legitimate interest (art. 7, IX).</li>
+        </ul>
+        <p>Your data isn't sold, used for advertising, or used to make automated decisions about you.</p>
+
+        <h2 id="sharing">Who processes it, and international transfers</h2>
+        <p>
+          PostHog (analytics), Cloudflare (hosting, security, Turnstile) and Google (email) process data on
+          my behalf. Their servers are in the United States and other countries, so data is transferred
+          outside Brazil (LGPD art. 33), under the data protection terms of each provider.
+        </p>
+
+        <h2 id="retention">How long it's kept</h2>
+        <ul>
+          <li>Analytics: in PostHog, for as long as its data retention keeps events, unless you ask me to delete them sooner.</li>
+          <li>Cloudflare logs: a few days.</li>
+          <li>Messages: in my email until I delete them; ask and I will.</li>
+          <li>Used challenge IDs: about 20 minutes.</li>
+        </ul>
+
+        <h2 id="rights">Your rights</h2>
+        <p>
+          Under LGPD art. 18 you can ask me to confirm whether I process your data, give you access, correct
+          it, anonymize, block or delete data that's unnecessary or excessive, provide it in a portable
+          format, tell you who it's shared with, and delete data processed on the basis of consent. You can
+          also object to processing based on legitimate interest. Email
+          <a href="mailto:zoe@zoe.dev.br">zoe@zoe.dev.br</a>; I'll reply within 15 days. You can also complain
+          to Brazil's data protection authority, the <a href="https://www.gov.br/anpd/">ANPD</a>.
+        </p>
+        <p>
+          To stop analytics on your side, turn on Do Not Track or Global Privacy Control in your browser, or
+          block scripts from this site.
+        </p>
+
+        <h2 id="changes">Changes</h2>
+        <p>If this policy changes, the new version will be posted here with a new date.</p>
+      </article>
+      <p class="back"><a href="/privacidade/">Leia em português →</a></p>
+    </main>
+
+    <footer>
+      <ul class="links">
+        <li><a href="https://github.com/zoeleu">github</a></li>
+        <li><a href="https://www.linkedin.com/in/zoeleu">linkedin</a></li>
+        <li><a href="/blog/">blog</a></li>
+        <li><a href="mailto:zoe@zoe.dev.br">email</a></li>
+        <li><a href="/privacy/">privacy</a></li>
+      </ul>
+      <p>© 2026 Zoe Leullier</p>
+    </footer>
+  </body>
+</html>
