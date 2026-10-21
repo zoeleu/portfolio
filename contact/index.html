@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light dark" />
+    <title>Contact — Zoe Leullier</title>
+    <meta name="description" content="Send Zoe Leullier a message." />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="stylesheet" href="/src/style.css" />
+    <!-- Fetch every page on this site right away, and fully render one as soon as its link is hovered (except the contact pages, so Turnstile only runs when the form is really opened). JSON read by the browser, not JavaScript. -->
+    <script type="speculationrules">
+      { "prefetch": [{ "where": { "href_matches": "/*" }, "eagerness": "immediate" }], "prerender": [{ "where": { "and": [{ "href_matches": "/*" }, { "not": { "href_matches": "/contact/*" } }] }, "eagerness": "eager" }] }
+    </script>
+    <script type="module" src="/src/preload.js"></script>
+    <!-- Turnstile, invisible: adds a hidden cf-turnstile-response field to the form. The only script this page needs. -->
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+  </head>
+  <body>
+    <nav>
+      <a href="/">home</a>
+      <a href="/projects/">projects</a>
+      <a href="/blog/">blog</a>
+      <a href="/contact/" aria-current="page">contact</a>
+    </nav>
+
+    <main>
+      <header>
+        <h1>Contact</h1>
+        <p class="role">Send me a message, or email <a href="mailto:zoe@zoe.dev.br">zoe@zoe.dev.br</a>.</p>
+      </header>
+
+      <form class="contact" method="post" action="/api/contact">
+        <label>
+          Name
+          <input name="name" autocomplete="name" maxlength="100" required />
+        </label>
+        <label>
+          <span>Subject <span class="optional">(optional)</span></span>
+          <input name="subject" maxlength="150" />
+        </label>
+        <label>
+          Message
+          <textarea name="message" rows="8" maxlength="5000" required></textarea>
+        </label>
+        <div class="cf-turnstile" data-sitekey="0x4AAAAAAFeuU_UeWrHrUDXe"></div>
+        <button type="submit">Send</button>
+      </form>
+    </main>
+
+    <footer>
+      <ul class="links">
+        <li><a href="https://github.com/zoeleu">github</a></li>
+        <li><a href="https://www.linkedin.com/in/zoeleu">linkedin</a></li>
+        <li><a href="/blog/">blog</a></li>
+        <li><a href="mailto:zoe@zoe.dev.br">email</a></li>
+      </ul>
+      <p>© 2026 Zoe Leullier</p>
+    </footer>
+  </body>
+</html>

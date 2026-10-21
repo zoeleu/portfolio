@@ -8,9 +8,9 @@
     <meta name="description" content="The first post on this site: why I started writing and what's coming next." />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="stylesheet" href="/src/style.css" />
-    <!-- Fetch every page on this site right away, and fully render one as soon as its link is hovered. JSON read by the browser, not JavaScript. -->
+    <!-- Fetch every page on this site right away, and fully render one as soon as its link is hovered (except the contact pages, so Turnstile only runs when the form is really opened). JSON read by the browser, not JavaScript. -->
     <script type="speculationrules">
-      { "prefetch": [{ "where": { "href_matches": "/*" }, "eagerness": "immediate" }], "prerender": [{ "where": { "href_matches": "/*" }, "eagerness": "eager" }] }
+      { "prefetch": [{ "where": { "href_matches": "/*" }, "eagerness": "immediate" }], "prerender": [{ "where": { "and": [{ "href_matches": "/*" }, { "not": { "href_matches": "/contact/*" } }] }, "eagerness": "eager" }] }
     </script>
     <script type="module" src="/src/preload.js"></script>
   </head>
@@ -19,7 +19,7 @@
       <a href="/">home</a>
       <a href="/projects/">projects</a>
       <a href="/blog/">blog</a>
-      <a href="mailto:zoe@zoe.dev.br">contact</a>
+      <a href="/contact/">contact</a>
     </nav>
 
     <main>

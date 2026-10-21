@@ -397,6 +397,63 @@ figcaption {
   color: var(--fg);
 }
 
+/* Contact form */
+
+.contact {
+  display: grid;
+  gap: 1.25rem;
+  margin-top: 2.5rem;
+}
+
+.contact label {
+  display: grid;
+  gap: 0.4rem;
+  font-weight: 500;
+}
+
+.contact .optional {
+  font-weight: 400;
+  color: var(--muted);
+}
+
+.contact input,
+.contact textarea {
+  width: 100%;
+  padding: 0.6rem 0.75rem;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: transparent;
+  color: var(--fg);
+  font: inherit;
+}
+
+.contact textarea {
+  resize: vertical;
+}
+
+.contact input:focus-visible,
+.contact textarea:focus-visible,
+.contact button:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 2px;
+}
+
+.contact button {
+  justify-self: start;
+  padding: 0.55rem 1.4rem;
+  border: 0;
+  border-radius: 6px;
+  background: var(--fg);
+  color: var(--bg);
+  font: inherit;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.contact button:hover {
+  opacity: 0.85;
+}
+
 /* Post lists: date column + title */
 
 .posts li {

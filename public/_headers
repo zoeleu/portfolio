@@ -16,3 +16,6 @@
 
 /projects/*
   Cache-Control: public, max-age=60
+
+/contact/*
+  Cache-Control: public, max-age=60

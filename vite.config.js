@@ -40,8 +40,11 @@ function inlineCss() {
 
 export default defineConfig({
   plugins: [cloudflare(), inlineCss()],
+  // The pages are the browser build's inputs only; the Worker build has its own.
+  environments: {
+    client: { build: { rollupOptions: { input: pages } } },
+  },
   build: {
-    rollupOptions: { input: pages },
     // Keep images as separate files: inlining puts every srcset size in the HTML.
     assetsInlineLimit: 0,
     // The only script is preload.js, with no imports: skip the polyfill that
