@@ -49,7 +49,9 @@
         <p>
           After a page has loaded, the site sends PostHog usage data: the pages you view, the links and
           buttons you click, how long you stay, the page you came from, and your browser, operating system
-          and screen size. Events go through this site, which removes your IP address before passing them
+          and screen size. It also records sessions and builds heatmaps: how the page looks as you use it,
+          your mouse movements, clicks and scrolling, so I can see where pages are confusing. Anything you type
+          into a form field is masked and never recorded. Events and recordings go through this site, which removes your IP address before passing them
           on, so PostHog only sees the address of the Cloudflare server that forwards them. No cookies are
           set: a random ID is kept in your browser's session storage and deleted when you close the tab.
           Nothing is sent if your browser sends Do Not Track or Global Privacy Control.
@@ -72,7 +74,7 @@
 
         <h2 id="purposes">Why, and on what legal basis</h2>
         <ul>
-          <li><strong>Analytics:</strong> understanding which pages are useful, to improve the site. Legitimate interest (LGPD art. 7, IX), with low impact: no cookies, no IP address, and Do Not Track respected.</li>
+          <li><strong>Analytics, session recordings and heatmaps:</strong> understanding which pages are useful and where they're confusing, to improve the site. Legitimate interest (LGPD art. 7, IX), with low impact: no cookies, no IP address, and Do Not Track respected.</li>
           <li><strong>Hosting and security:</strong> delivering the site and blocking abuse. Legitimate interest (art. 7, IX).</li>
           <li><strong>Messages:</strong> reading and answering what you send me, at your request. Legitimate interest (art. 7, IX).</li>
         </ul>
@@ -87,7 +89,7 @@
 
         <h2 id="retention">How long it's kept</h2>
         <ul>
-          <li>Analytics: in PostHog, for as long as its data retention keeps events, unless you ask me to delete them sooner.</li>
+          <li>Analytics and recordings: in PostHog, for as long as its data retention keeps them, unless you ask me to delete them sooner.</li>
           <li>Cloudflare logs: a few days.</li>
           <li>Messages: in my email until I delete them; ask and I will.</li>
           <li>Used challenge IDs: about 20 minutes.</li>

@@ -13,8 +13,9 @@ const optedOut = navigator.globalPrivacyControl === true || navigator.doNotTrack
 const local = ["localhost", "127.0.0.1", "[::1]"].includes(location.hostname);
 
 async function start() {
-  // The build without code that downloads extra scripts at runtime.
-  const { default: posthog } = await import("posthog-js/dist/module.no-external");
+  // The standard build: it downloads the session recorder later, only when
+  // recording is on for the project, through /ingest/static like everything else.
+  const { default: posthog } = await import("posthog-js");
   posthog.init(KEY, {
     api_host: "/ingest",
     ui_host: "https://us.posthog.com",
@@ -23,13 +24,13 @@ async function start() {
     capture_pageview: true,
     capture_pageleave: true,
     autocapture: { dom_event_allowlist: ["click"], element_allowlist: ["a", "button"] },
-    disable_session_recording: true,
+    // Recordings keep what is typed into fields out, like the contact form.
+    session_recording: { maskAllInputs: true },
+    enable_heatmaps: true,
     disable_surveys: true,
-    enable_heatmaps: false,
     capture_dead_clicks: false,
     capture_performance: false,
     advanced_disable_feature_flags: true,
-    disable_external_dependency_loading: true,
     respect_dnt: true,
   });
 }

@@ -49,7 +49,9 @@
         <p>
           Depois que a página carrega, o site envia ao PostHog dados de uso: as páginas que você vê, os links
           e botões em que clica, quanto tempo fica, a página de onde veio, e seu navegador, sistema
-          operacional e tamanho de tela. Os eventos passam por este site, que remove seu endereço IP antes de
+          operacional e tamanho de tela. Também grava sessões e gera mapas de calor: como a página aparece
+          enquanto você a usa, os movimentos do mouse, cliques e rolagem, para eu ver onde as páginas confundem.
+          O que você digita em campos de formulário é mascarado e nunca gravado. Os eventos e gravações passam por este site, que remove seu endereço IP antes de
           repassá-los, então o PostHog só vê o endereço do servidor da Cloudflare que os encaminha. Nenhum
           cookie é usado: um identificador aleatório fica no armazenamento de sessão do navegador e é apagado
           quando você fecha a aba. Nada é enviado se o seu navegador enviar Do Not Track ou Global Privacy
@@ -73,7 +75,7 @@
 
         <h2 id="finalidades">Por quê, e com qual base legal</h2>
         <ul>
-          <li><strong>Estatísticas:</strong> entender quais páginas são úteis, para melhorar o site. Legítimo interesse (LGPD art. 7º, IX), com baixo impacto: sem cookies, sem endereço IP, e respeitando o Do Not Track.</li>
+          <li><strong>Estatísticas, gravações de sessão e mapas de calor:</strong> entender quais páginas são úteis e onde confundem, para melhorar o site. Legítimo interesse (LGPD art. 7º, IX), com baixo impacto: sem cookies, sem endereço IP, e respeitando o Do Not Track.</li>
           <li><strong>Hospedagem e segurança:</strong> entregar o site e bloquear abusos. Legítimo interesse (art. 7º, IX).</li>
           <li><strong>Mensagens:</strong> ler e responder o que você me envia, a seu pedido. Legítimo interesse (art. 7º, IX).</li>
         </ul>
@@ -88,7 +90,7 @@
 
         <h2 id="retencao">Por quanto tempo</h2>
         <ul>
-          <li>Estatísticas: no PostHog, pelo prazo de retenção de eventos dele, a menos que você peça a exclusão antes.</li>
+          <li>Estatísticas e gravações: no PostHog, pelo prazo de retenção dele, a menos que você peça a exclusão antes.</li>
           <li>Registros da Cloudflare: alguns dias.</li>
           <li>Mensagens: no meu e-mail até eu apagá-las; é só pedir.</li>
           <li>Identificadores de desafios usados: cerca de 20 minutos.</li>
