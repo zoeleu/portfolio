@@ -104,7 +104,7 @@ p {
 .avatar {
   flex: none;
   border-radius: 50%;
-  /* The inline 10x10 JPEG placeholder shows until the real image covers it. */
+  /* The inline 10x10 WebP placeholder shows until the real image covers it. */
   background-color: var(--line);
   background-size: cover;
 }
