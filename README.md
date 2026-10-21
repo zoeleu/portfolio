@@ -21,7 +21,7 @@ public/                 static files (favicon, _headers caching rules)
 
 ## Contact form
 
-The form posts to `/api/contact` without JavaScript; the only script on the page is Cloudflare Turnstile (invisible). The Worker checks the Turnstile token, escapes the message for HTML, and sends it through Gmail's SMTP server to `website@zoe.dev.br`, then redirects to `/contact/sent/` or `/contact/error/`.
+The form posts to `/api/contact` without JavaScript; the only scripts on the page are Cloudflare Turnstile (Managed, shown only when it needs a click) and a few lines that enable Send once it has a token. The Worker checks the Turnstile token, escapes the message for HTML, and sends it through Gmail's SMTP server to the same Gmail address it sends from (`GMAIL_USER`), then redirects to `/contact/sent/` or `/contact/error/`.
 
 AI agents use a JSON API instead, documented in [`public/llms.txt`](public/llms.txt): `GET /api/agents/challenge`, then `POST /api/agents/message` with a proof of work, a nonce whose `sha256("<challenge>:<nonce>")` has 24 leading zero bits (about 10 s on one core). Challenges are signed with HMAC, not stored; a KV namespace records solved ones so each sends a single message.
 

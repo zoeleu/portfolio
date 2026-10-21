@@ -3,7 +3,9 @@
 
 import { connect } from "cloudflare:sockets";
 
-const RECIPIENT = "website@zoe.dev.br";
+// Messages go to the Gmail account that sends them (GMAIL_USER). Sending to an
+// address that forwards back to that same account makes Gmail drop the copy
+// as a duplicate of the one in Sent; mail to yourself lands in the inbox.
 const ALLOWED_HOSTNAMES = ["zoe.dev.br", "www.zoe.dev.br"];
 // Matches data-action on the contact page's Turnstile widget.
 const TURNSTILE_ACTION = "contact";
@@ -246,7 +248,7 @@ function base64Lines(text) {
   return base64(text).replace(/.{1,76}/g, "$&\r\n");
 }
 
-export function buildMessage({ from, name, subject, message }) {
+export function buildMessage({ from, to = from, name, subject, message }) {
   const cleanName = oneLine(name);
   const cleanSubject = oneLine(subject) || "(no subject)";
   const boundary = `contact-${crypto.randomUUID()}`;
@@ -259,7 +261,7 @@ export function buildMessage({ from, name, subject, message }) {
 
   return [
     `From: ${encodeHeader("Website contact form")} <${from}>`,
-    `To: <${RECIPIENT}>`,
+    `To: <${to}>`,
     `Subject: ${encodeHeader(`[website]: ${cleanSubject} from ${cleanName}`)}`,
     `Date: ${new Date().toUTCString()}`,
     `Message-ID: <${crypto.randomUUID()}@zoe.dev.br>`,
@@ -316,7 +318,7 @@ async function sendMail(env, data) {
     await reply(235);
     await send(`MAIL FROM:<${env.GMAIL_USER}>`);
     await reply(250);
-    await send(`RCPT TO:<${RECIPIENT}>`);
+    await send(`RCPT TO:<${env.GMAIL_USER}>`);
     await reply(250);
     await send("DATA");
     await reply(354);
