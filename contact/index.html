@@ -13,7 +13,7 @@
       { "prefetch": [{ "where": { "href_matches": "/*" }, "eagerness": "immediate" }], "prerender": [{ "where": { "and": [{ "href_matches": "/*" }, { "not": { "href_matches": "/contact/*" } }] }, "eagerness": "eager" }] }
     </script>
     <script type="module" src="/src/preload.js"></script>
-    <!-- Turnstile, invisible: adds a hidden cf-turnstile-response field to the form. The only script this page needs. -->
+    <!-- Turnstile: adds a hidden cf-turnstile-response field to the form, and shows a checkbox only when needed. The only script this page needs. -->
     <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
   </head>
   <body>
@@ -43,7 +43,8 @@
           Message
           <textarea name="message" rows="8" maxlength="5000" required></textarea>
         </label>
-        <div class="cf-turnstile" data-sitekey="0x4AAAAAAFeu3lvWkucprWxS" data-action="contact"></div>
+        <!-- Hidden unless Turnstile is unsure about the visitor; then a checkbox appears here. -->
+        <div class="cf-turnstile" data-sitekey="0x4AAAAAAFeu3lvWkucprWxS" data-action="contact" data-appearance="interaction-only"></div>
         <button type="submit">Send</button>
       </form>
     </main>

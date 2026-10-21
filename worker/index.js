@@ -73,7 +73,10 @@ async function handleContact(request, env, url) {
 // Fails closed: a missing or oversized token, a network error, a timeout, or
 // a token from another site or another form is a failure.
 async function turnstilePassed(token, ip, env) {
-  if (!token || token.length > 2048) return false;
+  if (!token || token.length > 2048) {
+    console.log(`turnstile rejected: ${token ? "token too long" : "no token (the widget did not finish)"}`);
+    return false;
+  }
   const body = new FormData();
   body.append("secret", env.TURNSTILE_SECRET);
   body.append("response", token);
@@ -93,7 +96,12 @@ async function turnstilePassed(token, ip, env) {
   // Test keys answer with hostname "example.com" and no action, so only real
   // tokens are held to ours.
   if (env.TURNSTILE_SECRET.startsWith("1x0000")) return result.success === true;
-  return result.success === true && result.action === TURNSTILE_ACTION && ALLOWED_HOSTNAMES.includes(result.hostname);
+  const passed = result.success === true && result.action === TURNSTILE_ACTION && ALLOWED_HOSTNAMES.includes(result.hostname);
+  if (!passed) {
+    // Turnstile's verdict only: never the form's contents.
+    console.log(`turnstile rejected: success=${result.success} errors=${(result["error-codes"] ?? []).join(",") || "none"} action=${result.action} hostname=${result.hostname}`);
+  }
+  return passed;
 }
 
 // --- Messages from AI agents, gated by proof of work ----------------------
