@@ -8,9 +8,9 @@
     <meta name="description" content="Mobiari, an all-in-one commerce platform: inbox, sales, stock, NF-e invoicing, online store and native mobile apps. What it does and what I built." />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="stylesheet" href="/src/style.css" />
-    <!-- Prerender a page on this site when its link is hovered. JSON read by the browser, not JavaScript. -->
+    <!-- Fetch every page on this site right away, and fully render one as soon as its link is hovered. JSON read by the browser, not JavaScript. -->
     <script type="speculationrules">
-      { "prerender": [{ "where": { "href_matches": "/*" }, "eagerness": "moderate" }] }
+      { "prefetch": [{ "where": { "href_matches": "/*" }, "eagerness": "immediate" }], "prerender": [{ "where": { "href_matches": "/*" }, "eagerness": "eager" }] }
     </script>
   </head>
   <body>
