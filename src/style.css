@@ -209,6 +209,26 @@ figure img {
   border-radius: 6px;
 }
 
+/* Phone screenshots side by side; the device frame is the border. */
+.phones {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  align-items: end;
+}
+
+.phones img {
+  justify-self: center;
+  border: 0;
+  border-radius: 0;
+}
+
+/* The Android frame is taller for its width (587 vs 559 at 280px wide), so
+   narrow it by 559/587 to stand as tall as the iPhone next to it. */
+.phones img[src*="android"] {
+  width: 95.23%;
+}
+
 figcaption {
   margin-top: 0.4rem;
   font-size: 0.875rem;

@@ -1,0 +1,266 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light dark" />
+    <title>Mobiari — Zoe Leullier</title>
+    <meta name="description" content="Mobiari, an all-in-one commerce platform: inbox, sales, stock, NF-e invoicing, online store and native mobile apps. What it does and what I built." />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="stylesheet" href="/src/style.css" />
+  </head>
+  <body>
+    <nav>
+      <a href="/">home</a>
+      <a href="/blog/">blog</a>
+      <a href="mailto:zoe@zoe.dev.br">contact</a>
+    </nav>
+
+    <main>
+      <header>
+        <h1>Mobiari</h1>
+        <p class="role">An all-in-one commerce platform: sell, answer customers and run the back office in one system.</p>
+        <p class="meta">Develari · Full-stack developer · Team of 2, with Ari Rocha · Aug 2026 – present</p>
+      </header>
+
+      <section aria-labelledby="stack">
+        <h2 id="stack">Languages &amp; tools</h2>
+        <ul class="pills">
+          <li>Rust</li>
+          <li>axum</li>
+          <li>PostgreSQL</li>
+          <li>sqlx</li>
+          <li>TypeScript</li>
+          <li>React 19</li>
+          <li>TanStack Start</li>
+          <li>Tailwind CSS</li>
+          <li>Kotlin</li>
+          <li>Jetpack Compose</li>
+          <li>Swift</li>
+          <li>SwiftUI</li>
+          <li>AWS</li>
+          <li>OpenTofu</li>
+          <li>GitHub Actions</li>
+          <li>OpenTelemetry</li>
+        </ul>
+      </section>
+
+      <section aria-labelledby="overview" class="overview">
+        <h2 id="overview">Overview</h2>
+        <p>
+          Mobiari replaces the stack of separate tools a Brazilian online store usually juggles. One
+          inbox brings in WhatsApp, Instagram, site chat and e-mail, with an AI assistant that answers
+          customers, builds carts and hands over to the team when a person is needed. Behind it sit
+          orders, a point of sale, discounts, catalog, stock and purchasing, NF-e invoicing, an online
+          store with its own theme editor, marketing posts and catalogs, visual automations, and a
+          public API with signed webhooks.
+        </p>
+        <p>
+          It runs on a Rust backend split into 21 crates, a React web app, and native Android and iOS
+          apps for merchants, deployed to AWS from GitHub Actions. The codebase is about 265,000 lines
+          of Rust, 140,000 of TypeScript, and 70,000 of Kotlin and Swift.
+        </p>
+      </section>
+
+      <section aria-labelledby="mine" class="overview">
+        <h2 id="mine">What I built</h2>
+        <p>
+          I joined in August 2026, spent the first weeks reading the codebase, and have made 848
+          commits since September, across the backend, web app, mobile apps and infrastructure.
+          The main pieces:
+        </p>
+        <ul class="list">
+          <li>
+            <strong>Backend architecture</strong>
+            <span>Split the monolithic backend into a Cargo workspace of 18 layered crates, where each crate only depends on the ones below it, so the compiler enforces the architecture.</span>
+          </li>
+          <li>
+            <strong>Native mobile apps</strong>
+            <span>Started both merchant apps, Kotlin/Compose on Android and SwiftUI on iOS, and wrote about three quarters of their code: sign-in, store switching, the inbox, voice messages with a hold-to-record composer, bulk actions, saved views, AI summaries and push notifications.</span>
+          </li>
+          <li>
+            <strong>Conversations and the AI assistant</strong>
+            <span>Voice note transcription, customer memory the assistant builds from conversations, handing a conversation back to the AI, follow-up sequences for stale leads, and selling tools inside the inbox.</span>
+          </li>
+          <li>
+            <strong>Orders and shipping</strong>
+            <span>Partial shipments, kits that leave in several boxes, and stock holds that survive retries and refunds.</span>
+          </li>
+        </ul>
+      </section>
+
+      <section aria-labelledby="screenshots">
+        <h2 id="screenshots">Screenshots</h2>
+        <figure>
+          <img
+            src="/src/projects/mobiari-assisted-sale-576.webp"
+            srcset="/src/projects/mobiari-assisted-sale-576.webp 576w, /src/projects/mobiari-assisted-sale-1152.webp 1152w"
+            sizes="(max-width: 38rem) 100vw, 36rem"
+            width="576"
+            height="343"
+            alt="The inbox: the AI assistant finds a product, fills a cart of 12 items and asks for the customer's WhatsApp, while the side panel shows the assisted sale with payment options."
+            loading="lazy"
+          />
+          <figcaption>An assisted sale in the inbox: the assistant fills the cart, the side panel takes it to payment.</figcaption>
+        </figure>
+        <figure>
+          <img
+            src="/src/projects/mobiari-customer-memory-576.webp"
+            srcset="/src/projects/mobiari-customer-memory-576.webp 576w, /src/projects/mobiari-customer-memory-1152.webp 1152w"
+            sizes="(max-width: 38rem) 100vw, 36rem"
+            width="576"
+            height="343"
+            alt="The same conversation, with the customer memory panel listing facts the assistant noted, each linked to the message it came from."
+            loading="lazy"
+          />
+          <figcaption>Customer memory: facts the assistant picks up from the conversation, with their source.</figcaption>
+        </figure>
+        <figure>
+          <img
+            src="/src/projects/mobiari-inbox-handoff-576.webp"
+            srcset="/src/projects/mobiari-inbox-handoff-576.webp 576w, /src/projects/mobiari-inbox-handoff-1152.webp 1152w"
+            sizes="(max-width: 38rem) 100vw, 36rem"
+            width="576"
+            height="343"
+            alt="An Instagram conversation with voice notes and transcripts, after the assistant handed the conversation to the team."
+            loading="lazy"
+          />
+          <figcaption>Voice notes with transcripts, and a conversation the assistant handed to the team.</figcaption>
+        </figure>
+        <figure>
+          <img
+            src="/src/projects/mobiari-customers-576.webp"
+            srcset="/src/projects/mobiari-customers-576.webp 576w, /src/projects/mobiari-customers-1152.webp 1152w"
+            sizes="(max-width: 38rem) 100vw, 36rem"
+            width="576"
+            height="343"
+            alt="The customers list with lifecycle stages, contact details hidden."
+            loading="lazy"
+          />
+          <figcaption>Customers with lifecycle stages. Contact details are hidden here.</figcaption>
+        </figure>
+      </section>
+
+      <section aria-labelledby="mobile">
+        <h2 id="mobile">Mobile apps</h2>
+        <figure>
+          <div class="phones">
+            <img
+              src="/src/projects/mobiari-ios-inbox-280.webp"
+              srcset="/src/projects/mobiari-ios-inbox-280.webp 280w, /src/projects/mobiari-ios-inbox-560.webp 560w"
+              sizes="(max-width: 38rem) 46vw, 17.5rem"
+              width="280"
+              height="559"
+              alt="The iOS app's inbox in dark mode: conversations with channel icons, assignees and an overdue reply warning."
+              loading="lazy"
+            />
+            <img
+              src="/src/projects/mobiari-android-inbox-280.webp"
+              srcset="/src/projects/mobiari-android-inbox-280.webp 280w, /src/projects/mobiari-android-inbox-560.webp 560w"
+              sizes="(max-width: 38rem) 46vw, 17.5rem"
+              width="280"
+              height="587"
+              alt="The Android app's inbox in light mode, with the same conversations and filters for open, mine and unassigned."
+              loading="lazy"
+            />
+          </div>
+          <figcaption>The inbox on iOS (SwiftUI) and Android (Jetpack Compose), from the same API.</figcaption>
+        </figure>
+        <figure>
+          <div class="phones">
+            <img
+              src="/src/projects/mobiari-ios-assistant-280.webp"
+              srcset="/src/projects/mobiari-ios-assistant-280.webp 280w, /src/projects/mobiari-ios-assistant-560.webp 560w"
+              sizes="(max-width: 38rem) 46vw, 17.5rem"
+              width="280"
+              height="559"
+              alt="The iOS store assistant answering how sales went this week, after running a sales report tool."
+              loading="lazy"
+            />
+            <img
+              src="/src/projects/mobiari-android-assistant-280.webp"
+              srcset="/src/projects/mobiari-android-assistant-280.webp 280w, /src/projects/mobiari-android-assistant-560.webp 560w"
+              sizes="(max-width: 38rem) 46vw, 17.5rem"
+              width="280"
+              height="587"
+              alt="The Android store assistant answering the same question after running the sales report tool."
+              loading="lazy"
+            />
+          </div>
+          <figcaption>The store assistant runs a sales report and answers, on both platforms.</figcaption>
+        </figure>
+        <figure>
+          <div class="phones">
+            <img
+              src="/src/projects/mobiari-android-overview-280.webp"
+              srcset="/src/projects/mobiari-android-overview-280.webp 280w, /src/projects/mobiari-android-overview-560.webp 560w"
+              sizes="(max-width: 38rem) 46vw, 17.5rem"
+              width="280"
+              height="587"
+              alt="The Android home screen: an assistant prompt, sales today and this month, counts of pending orders, products and customers, and abandoned carts."
+              loading="lazy"
+            />
+            <img
+              src="/src/projects/mobiari-ios-products-280.webp"
+              srcset="/src/projects/mobiari-ios-products-280.webp 280w, /src/projects/mobiari-ios-products-560.webp 560w"
+              sizes="(max-width: 38rem) 46vw, 17.5rem"
+              width="280"
+              height="559"
+              alt="The iOS product list with stock levels and prices, and a barcode scanner button."
+              loading="lazy"
+            />
+          </div>
+          <figcaption>The store overview on Android, and the catalog with a barcode scanner on iOS.</figcaption>
+        </figure>
+      </section>
+
+      <section aria-labelledby="skills">
+        <h2 id="skills">What it shows</h2>
+        <ul class="skills">
+          <li>
+            <strong>Systems design in Rust</strong>
+            <p>A layered workspace where crate boundaries enforce dependencies, on axum, sqlx and PostgreSQL with 292 migrations.</p>
+          </li>
+          <li>
+            <strong>Native mobile on two platforms</strong>
+            <p>The same product in Kotlin with Jetpack Compose and in Swift with SwiftUI, sharing an OpenAPI-generated client contract and error messages.</p>
+          </li>
+          <li>
+            <strong>Applied AI</strong>
+            <p>An assistant that answers customers, builds carts, remembers facts and knows when to hand over, plus speech-to-text for voice notes.</p>
+          </li>
+          <li>
+            <strong>Shipping to production</strong>
+            <p>CI that runs per area, deploys to AWS (Graviton, S3, CloudFront) from GitHub Actions, and traces requests with OpenTelemetry.</p>
+          </li>
+          <li>
+            <strong>Agentic coding with Claude</strong>
+            <p>Shipping features faster with AI agents, reviewing AI-written code quickly and carefully, and learning how to steer agents into writing good code.</p>
+          </li>
+        </ul>
+      </section>
+
+      <section aria-labelledby="links">
+        <h2 id="links">Links</h2>
+        <ul class="list">
+          <li>
+            <a href="https://mobiari.com">mobiari.com</a>
+            <span>The product site. The source code is private.</span>
+          </li>
+        </ul>
+      </section>
+
+      <p class="back"><a href="/">← back home</a></p>
+    </main>
+
+    <footer>
+      <ul class="links">
+        <li><a href="https://github.com/zoeleu">github</a></li>
+        <li><a href="https://www.linkedin.com/in/zoeleu">linkedin</a></li>
+        <li><a href="/blog/">blog</a></li>
+        <li><a href="mailto:zoe@zoe.dev.br">email</a></li>
+      </ul>
+      <p>© 2026 Zoe Leullier</p>
+    </footer>
+  </body>
+</html>
