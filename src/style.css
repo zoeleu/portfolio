@@ -205,6 +205,8 @@ figure img {
   display: block;
   width: 100%;
   height: auto;
+  /* The inline 16px WebP placeholder shows until the screenshot covers it. */
+  background-size: cover;
   border: 1px solid var(--line);
   border-radius: 6px;
 }
