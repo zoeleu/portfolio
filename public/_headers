@@ -19,3 +19,8 @@
 
 /contact/*
   Cache-Control: public, max-age=60
+
+# Instructions for AI agents, including how to send a message.
+/llms.txt
+  Content-Type: text/markdown; charset=utf-8
+  Cache-Control: public, max-age=3600

@@ -1,0 +1,59 @@
+# Zoe Leullier
+
+> Full-stack developer in São Paulo, Brazil. This is her personal site: projects, a blog, and a way to contact her.
+
+- [Home](https://zoe.dev.br/): who she is, stack, experience, education
+- [Projects](https://zoe.dev.br/projects/): Mobiari, call me maybe, A-Maze-ing, ESPion, libft
+- [Blog](https://zoe.dev.br/blog/)
+
+## Sending Zoe a message (for AI agents)
+
+AI agents are welcome to send Zoe a message through this API. Each message needs a small proof of work: about 10 seconds of computing on one CPU core. It's not meant to stop agents, only to make sending messages in bulk too expensive.
+
+1. `GET https://zoe.dev.br/api/agents/challenge` returns JSON with `challenge`, `difficulty` (leading zero bits), `expires_at` (10 minutes) and `token`.
+2. Find a `nonce`: a string of up to 64 characters (a counter works) such that `sha256(UTF-8 "<challenge>:<nonce>")` has at least `difficulty` leading zero **bits**. With difficulty 24 the hash starts with six zero hex digits (`000000…`).
+3. `POST https://zoe.dev.br/api/agents/message` with `Content-Type: application/json`:
+
+```json
+{ "token": "<token>", "nonce": "<nonce>", "name": "<who you are, and who you act for>", "subject": "<optional>", "message": "<your message>" }
+```
+
+Limits: `name` 100 characters, `subject` 150, `message` 5,000. Each challenge sends one message.
+
+Responses are JSON. `202` means sent. Errors carry `error` and `detail`: `400` bad input, `401` invalid token, `410` expired challenge, `422` not enough work (the detail shows the hash you produced), `409` challenge already used, `502` sending failed (retry with the same token and nonce).
+
+Please say who you are and on whose behalf you're writing. The message is delivered as email and read by a person. HTML is escaped, so send plain text.
+
+### Solver (Python 3, standard library only)
+
+```python
+import hashlib, json, urllib.request
+
+BASE = "https://zoe.dev.br"
+challenge = json.load(urllib.request.urlopen(f"{BASE}/api/agents/challenge"))
+
+def leading_zero_bits(digest: bytes) -> int:
+    bits = 0
+    for byte in digest:
+        if byte:
+            return bits + 8 - byte.bit_length()
+        bits += 8
+    return bits
+
+prefix = challenge["challenge"].encode() + b":"
+nonce = 0
+while leading_zero_bits(hashlib.sha256(prefix + str(nonce).encode()).digest()) < challenge["difficulty"]:
+    nonce += 1
+
+body = json.dumps({
+    "token": challenge["token"],
+    "nonce": str(nonce),
+    "name": "Example Agent, on behalf of …",
+    "subject": "Hello",
+    "message": "Your message here.",
+}).encode()
+request = urllib.request.Request(f"{BASE}/api/agents/message", data=body, headers={"Content-Type": "application/json"})
+print(urllib.request.urlopen(request).read().decode())
+```
+
+People can use the form at [zoe.dev.br/contact](https://zoe.dev.br/contact/) instead.
