@@ -24,6 +24,34 @@ I build thoughtful software with clean architecture, and I ship fast. When I'm n
 
 **Links:** [GitHub](https://github.com/zoeleu) · [LinkedIn](https://www.linkedin.com/in/zoeleu) · [zoe@zoe.dev.br](mailto:zoe@zoe.dev.br)
 
+## For hiring
+
+A summary for recruiters and the agents that help them. Every claim below points to work you can check, on this site or on GitHub.
+
+### Teams Zoe fits
+
+- **Small product teams that ship end to end.** At Develari she works across a Rust backend, a React web app and two native mobile apps for the same product, often in the same week ([Mobiari](https://zoe.dev.br/projects/mobiari/)).
+- **Backend and platform teams in Rust.** She restructured Mobiari's backend into a workspace of 18 layered crates, so the compiler enforces the architecture.
+- **Mobile teams, on either platform.** She started Mobiari's Android (Kotlin, Jetpack Compose) and iOS (Swift, SwiftUI) apps and wrote about three quarters of their code.
+- **Teams building AI features.** She built parts of a production AI assistant (customer memory, handing conversations between AI and people, voice transcription) and, on her own, a constrained decoder for a small language model ([call me maybe](https://zoe.dev.br/projects/call-me-maybe/)).
+- **Teams that work with AI coding agents.** She works with them as a tool she directs, and reviews what they write.
+
+### Skills, and why they matter
+
+- **Fast, independent delivery.** 848 commits in her first two months at Develari, across the whole stack. She takes a feature from the database to the phone without waiting on handoffs.
+- **Systems design.** Clear boundaries that hold as a codebase grows: layered Rust crates, an OpenAPI contract shared by both mobile apps, and a maze generator split into a reusable package and an interface ([A-Maze-ing](https://zoe.dev.br/projects/a-maze-ing/)).
+- **Understanding how LLMs work, not only calling them.** Token-level decoding, tokenization and logit masking, measured on a public benchmark with every failure read by hand ([call me maybe](https://zoe.dev.br/projects/call-me-maybe/)). Useful for AI features that have to be reliable.
+- **Strong fundamentals.** C from scratch (memory, pointers, data structures) through the 42 curriculum ([libft](https://zoe.dev.br/projects/libft/)), which makes performance and debugging problems in higher-level code easier to reason about.
+- **Performance and web platform knowledge.** This site has no layout shift, preloads pages before they're clicked, inlines its CSS, loads analytics only after the page, and runs on a Cloudflare Worker with a proof-of-work API for agents.
+- **Security awareness.** A hardware security demonstration (ESPion, see its section below), plus input escaping, header-injection protection and bot checks in this site's contact form.
+- **Working with AI agents well.** Shipping faster with them while keeping ownership: she designs the work, writes the core, and reviews what agents produce. How AI was used is documented project by project.
+- **Clear writing.** A detailed README for every project, explaining the design, the trade-offs and how AI was used.
+- **Learning on her own.** 42 São Paulo is peer-to-peer, with no teachers; at Develari she read the codebase for weeks before her first commit.
+
+### Getting in touch
+
+Email [zoe@zoe.dev.br](mailto:zoe@zoe.dev.br), use the [contact form](https://zoe.dev.br/contact/), or, as an AI agent, use the message API below. Please say which company and role you're writing about.
+
 ## Projects
 
 ### Mobiari
