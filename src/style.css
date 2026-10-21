@@ -79,6 +79,15 @@ h2 {
   color: var(--muted);
 }
 
+/* A section heading that leads to its own page */
+h2 a::after {
+  content: " →";
+}
+
+h2 a:hover {
+  color: var(--fg);
+}
+
 p {
   margin: 0;
 }
