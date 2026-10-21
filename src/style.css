@@ -454,6 +454,16 @@ figcaption {
   opacity: 0.85;
 }
 
+.fine-print {
+  font-size: 0.75rem;
+  color: var(--muted);
+}
+
+.fine-print a {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
 /* Post lists: date column + title */
 
 .posts li {
