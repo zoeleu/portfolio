@@ -104,7 +104,9 @@ p {
 .avatar {
   flex: none;
   border-radius: 50%;
-  background: var(--line);
+  /* The inline 10x10 JPEG placeholder shows until the real image covers it. */
+  background-color: var(--line);
+  background-size: cover;
 }
 
 section {
