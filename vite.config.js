@@ -11,8 +11,35 @@ const pages = readdirSync(".", { recursive: true })
   .filter((f) => f.endsWith("index.html") && !/^(node_modules|dist|\.[^/]+)\//.test(f))
   .map((f) => resolve(f));
 
+// On build, replace each page's stylesheet <link> with an inline <style>:
+// the CSS is small, so this saves a render-blocking request. The CSS file is
+// then dropped from the output, since no page links to it any more.
+function inlineCss() {
+  const sources = new Map();
+  return {
+    name: "inline-css",
+    apply: "build",
+    transformIndexHtml: {
+      order: "post",
+      handler(html, { bundle }) {
+        return html.replace(/<link\b[^>]*\brel="stylesheet"[^>]*>/g, (tag) => {
+          const file = tag.match(/\bhref="\/?([^"]+\.css)"/)?.[1];
+          if (!file) return tag;
+          if (!sources.has(file)) {
+            const asset = bundle?.[file];
+            if (asset?.type !== "asset") return tag;
+            sources.set(file, String(asset.source));
+            delete bundle[file];
+          }
+          return `<style>${sources.get(file)}</style>`;
+        });
+      },
+    },
+  };
+}
+
 export default defineConfig({
-  plugins: [cloudflare()],
+  plugins: [cloudflare(), inlineCss()],
   build: {
     rollupOptions: { input: pages },
     // Keep images as separate files: inlining puts every srcset size in the HTML.
