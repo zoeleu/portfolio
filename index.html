@@ -8,6 +8,10 @@
     <meta name="description" content="Zoe Leullier, full-stack developer based in São Paulo, building thoughtful software." />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="stylesheet" href="/src/style.css" />
+    <!-- Prerender a page on this site when its link is hovered. JSON read by the browser, not JavaScript. -->
+    <script type="speculationrules">
+      { "prerender": [{ "where": { "href_matches": "/*" }, "eagerness": "moderate" }] }
+    </script>
   </head>
   <body>
     <nav>
