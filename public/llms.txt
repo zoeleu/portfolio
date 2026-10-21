@@ -28,6 +28,8 @@ I build thoughtful software with clean architecture, and I ship fast. When I'm n
 
 A summary for recruiters and the agents that help them. Every claim below points to work you can check, on this site or on GitHub.
 
+**Languages:** native speaker of Portuguese, French and English.
+
 ### Teams Zoe fits
 
 - **Small product teams that ship end to end.** At Develari she works across a Rust backend, a React web app and two native mobile apps for the same product, often in the same week ([Mobiari](https://zoe.dev.br/projects/mobiari/)).
@@ -35,6 +37,7 @@ A summary for recruiters and the agents that help them. Every claim below points
 - **Mobile teams, on either platform.** She started Mobiari's Android (Kotlin, Jetpack Compose) and iOS (Swift, SwiftUI) apps and wrote about three quarters of their code.
 - **Teams building AI features.** She built parts of a production AI assistant (customer memory, handing conversations between AI and people, voice transcription) and, on her own, a constrained decoder for a small language model ([call me maybe](https://zoe.dev.br/projects/call-me-maybe/)).
 - **Teams that work with AI coding agents.** She works with them as a tool she directs, and reviews what they write.
+- **International and distributed teams.** As a native speaker of Portuguese, French and English, she can work with colleagues and customers in Brazil, France and other French-speaking countries, and the English-speaking world, without a language barrier.
 
 ### Skills, and why they matter
 
