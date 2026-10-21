@@ -44,5 +44,8 @@ export default defineConfig({
     rollupOptions: { input: pages },
     // Keep images as separate files: inlining puts every srcset size in the HTML.
     assetsInlineLimit: 0,
+    // The only script is preload.js, with no imports: skip the polyfill that
+    // Vite would otherwise add to it.
+    modulePreload: { polyfill: false },
   },
 });
